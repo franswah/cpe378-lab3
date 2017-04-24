@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=AnimatedActor
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ AnimatedActor\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ AnimatedActor\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment2.params=genName\ min\ max
+comment2.target=java.util.List\ loadAnimationFrames(java.lang.String,\ int,\ int)
+comment2.text=\r\n\ Filename\ should\ include\ a\ format\ string\ "%0nd"\ where\ n\ is\ the\ number\ of\ total\ digits\ in\r\n\ each\ filename.\r\n\ \r\n\ Min\ inclusive,\ max\ exclusive\r\n
+comment3.params=
+comment3.target=greenfoot.GreenfootImage\ getCurrentAnimationFrame()
+numComments=4
