@@ -7,12 +7,13 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Hero extends AnimatedActor
+public class Hero extends MovingActor
 {
     List<GreenfootImage> m_LFrames;
     List<GreenfootImage> m_RFrames;
     
     final int ANIMATION_OFFSET = 2;
+    final int SPEED = 5;
     
     int currentFrame = 0;
     int offset = ANIMATION_OFFSET;
@@ -48,5 +49,10 @@ public class Hero extends AnimatedActor
         }
         
         return m_LFrames.get(currentFrame);
+    }
+    
+    public int getSpeed()
+    {
+        return SPEED;
     }
 }
