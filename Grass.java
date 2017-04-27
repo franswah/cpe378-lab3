@@ -1,19 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Platform here.
+ * Write a description of class Grass here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Platform extends StaticActor
+public class Grass extends Ground
 {
-     public Platform(int x, int y) {
+    
+    Grass(int x, int y) {
         super(x, y);
     }
-    
     /**
-     * Act - do whatever the Platform wants to do. This method is called whenever
+     * Act - do whatever the Grass wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 

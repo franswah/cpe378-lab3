@@ -26,9 +26,9 @@ public class Hero extends MovingActor
     int currentFrame = 0;
     int offset = ANIMATION_OFFSET;
     
-    public Hero()
+    public Hero(int x, int y)
     {
-        super();
+        super(x, y);
         
         mR_frames = loadAnimationFrames("WerewolfWalk/WerewolfWalk_%05d.png", 0, 17);
         mL_frames = loadAnimationFrames("WerewolfWalk/WerewolfWalk_%05d.png", 0, 17);
@@ -47,12 +47,24 @@ public class Hero extends MovingActor
     public void act() 
     {
         super.act();
+        
+        CameraWorld world = (CameraWorld)getWorld();
+        
         if (--offset < 0)
         {
             currentFrame++;
             offset = ANIMATION_OFFSET;
         }
         
+        actualX = world.getCameraX() + 500;
+        actualY = world.getCameraY() + 300;
+        
+        if (Greenfoot.isKeyDown("d")){
+            ((CameraWorld)getWorld()).moveX(SPEED);
+        }
+        else if (Greenfoot.isKeyDown("a")) {
+            ((CameraWorld)getWorld()).moveX(-SPEED);
+        }
     }    
     
     public GreenfootImage getCurrentAnimationFrame()
