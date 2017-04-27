@@ -8,6 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class MovingActor extends AnimatedActor
 {
+     public MovingActor(int x, int y) {
+        super(x, y);
+    }
+    
     private final float G = 9.8f;
     
     private int vX = 0;
