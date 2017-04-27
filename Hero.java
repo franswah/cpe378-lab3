@@ -34,8 +34,8 @@ public class Hero extends MovingActor
         mL_frames = loadAnimationFrames("WerewolfWalk/WerewolfWalk_%05d.png", 0, 17);
         mirrorFramesHorizontally(mL_frames);
         
-        idleR_frames = loadAnimationFrames("WerewolfIdle/WerewolfIdle_%05d.png", 0, 17);
-        idleL_frames = loadAnimationFrames("WerewolfIdle/WerewolfIdle_%05d.png", 0, 17);
+        idleR_frames = loadAnimationFrames("WerewolfIdle/WerewolfIdle_%05d.png", 0, 3);
+        idleL_frames = loadAnimationFrames("WerewolfIdle/WerewolfIdle_%05d.png", 0, 3);
         mirrorFramesHorizontally(idleL_frames);
     }
     

@@ -1,4 +1,5 @@
 import java.util.*;
+import greenfoot.*;
 
 /**
  * Write a description of class Animation here.
