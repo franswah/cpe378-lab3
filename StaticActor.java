@@ -12,6 +12,9 @@ public class StaticActor extends CameraActor
         super(x,y);
     }
         
+    public int getSpeed() {
+        return 1;
+    }
     /**
      * Act - do whatever the StaticActor wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.

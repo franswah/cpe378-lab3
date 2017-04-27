@@ -10,6 +10,7 @@ public abstract class CameraActor extends Actor
 {
     protected int actualX;
     protected int actualY;
+    int clock = 0;
     
     public CameraActor(int x, int y) {
         actualX = x;
@@ -22,7 +23,15 @@ public abstract class CameraActor extends Actor
      */
     public void act() 
     {
-        CameraWorld camWorld = (CameraWorld)getWorld();
-        setLocation(actualX - camWorld.getCameraX(), actualY - camWorld.getCameraY());
-    }    
+        
+        if(clock == getSpeed()) {
+            CameraWorld camWorld = (CameraWorld)getWorld();
+            setLocation(actualX - (camWorld.getCameraX() / getSpeed()), actualY - camWorld.getCameraY());
+            clock = 1;
+        } else {
+            clock++;
+        }
+    }
+    
+    abstract public int getSpeed();
 }
