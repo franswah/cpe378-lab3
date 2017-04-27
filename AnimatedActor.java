@@ -36,7 +36,14 @@ public abstract class AnimatedActor extends CameraActor
         for (int i = min; i < max; i++)
         {
             String fileName = String.format(genName, i);
-            frames.add(new GreenfootImage(fileName));
+            GreenfootImage image = new GreenfootImage(fileName);
+            int height = image.getHeight();
+            
+            int width = image.getWidth();
+            int ratio = width / 100;
+            
+            image.scale(100,  Integer.valueOf((image.getHeight() / ratio)));
+            frames.add(image);
         }
         
         return frames;
