@@ -33,11 +33,18 @@ public class Hero extends MovingActor
     public void act() 
     {
         super.act();
+        
+        CameraWorld world = (CameraWorld)getWorld();
+        
         if (--offset < 0)
         {
             currentFrame++;
             offset = ANIMATION_OFFSET;
         }
+        
+        actualX = world.getCameraX() + 500;
+        actualY = world.getCameraY() + 300;
+        
         if (Greenfoot.isKeyDown("d")){
             ((CameraWorld)getWorld()).moveX(SPEED);
         }
