@@ -14,6 +14,6 @@ public class Forest extends ParralaxActor
     
     @Override()
     public int getSpeed() {
-        return 5;
+        return 10;
     }
 }
