@@ -9,8 +9,16 @@ import java.util.*;
  */
 public class Hero extends MovingActor
 {
-    List<GreenfootImage> m_LFrames;
-    List<GreenfootImage> m_RFrames;
+    List<GreenfootImage> mL_frames;
+    List<GreenfootImage> mR_frames;
+    List<GreenfootImage> idleL_frames;
+    List<GreenfootImage> idleR_frames;
+    List<GreenfootImage> attackL_frames;
+    List<GreenfootImage> attackR_frames;
+    List<GreenfootImage> upL_frames;
+    List<GreenfootImage> upR_frames;
+    List<GreenfootImage> downL_frames;
+    List<GreenfootImage> downR_frames;
     
     final int ANIMATION_OFFSET = 2;
     final int SPEED = 5;
@@ -22,7 +30,13 @@ public class Hero extends MovingActor
     {
         super(x, y);
         
-        m_LFrames = loadAnimationFrames("WerewolfWalk_%05d.png", 0, 17);
+        mR_frames = loadAnimationFrames("WerewolfWalk/WerewolfWalk_%05d.png", 0, 17);
+        mL_frames = loadAnimationFrames("WerewolfWalk/WerewolfWalk_%05d.png", 0, 17);
+        mirrorFramesHorizontally(mL_frames);
+        
+        idleR_frames = loadAnimationFrames("WerewolfIdle/WerewolfIdle_%05d.png", 0, 3);
+        idleL_frames = loadAnimationFrames("WerewolfIdle/WerewolfIdle_%05d.png", 0, 3);
+        mirrorFramesHorizontally(idleL_frames);
     }
     
     
@@ -55,12 +69,12 @@ public class Hero extends MovingActor
     
     public GreenfootImage getCurrentAnimationFrame()
     {
-        if (currentFrame >= m_LFrames.size())
+        if (currentFrame >= mL_frames.size())
         {
             currentFrame = 0;
         }
         
-        return m_LFrames.get(currentFrame);
+        return mR_frames.get(currentFrame);
     }
     
     public int getSpeed()

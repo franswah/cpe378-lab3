@@ -27,6 +27,7 @@ public abstract class AnimatedActor extends CameraActor
      * Filename should include a format string "%0nd" where n is the number of total digits in
      * each filename.
      * 
+     * Screw Greenfoot
      * Min inclusive, max exclusive
      */
     public List<GreenfootImage> loadAnimationFrames(String genName, int min, int max)
@@ -39,6 +40,14 @@ public abstract class AnimatedActor extends CameraActor
         }
         
         return frames;
+    }
+    
+    public void mirrorFramesHorizontally(List<GreenfootImage> frames)
+    {
+        for (GreenfootImage frame : frames)
+        {
+            frame.mirrorHorizontally();
+        }
     }
     
     public abstract GreenfootImage getCurrentAnimationFrame();
