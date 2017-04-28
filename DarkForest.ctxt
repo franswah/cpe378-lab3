@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=DarkForest
+comment0.text=\n\ Write\ a\ description\ of\ class\ forest\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=x\ y
+comment1.target=DarkForest(int,\ int)
+numComments=2

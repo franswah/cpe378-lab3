@@ -20,6 +20,16 @@ public class IntroScenario extends CameraWorld
     }
     
     protected void prepare() {
+        
+        addObject(new DarkMountain(500,300), 0,0);
+        addObject(new DarkMountainFlipped(1500, 300), 0, 0);
+        
+        addObject(new DarkForest(500,300), 0, 0);
+        addObject(new DarkForestFlipped(1500, 300), 0, 0);
+
+        
+        
+        
         addObject(new Grass(25, 575), 0, 0);
         addObject(new Grass(75, 575), 0, 0);
         addObject(new Grass(125, 575), 0, 0);
@@ -40,7 +50,9 @@ public class IntroScenario extends CameraWorld
         addObject(new Grass(875, 575), 0, 0);
         addObject(new Grass(925, 575), 0, 0);
         addObject(new Grass(975, 575), 0, 0);
+
         addObject(new Hero(0, 0), 0, 0);
-        setBackground("images/day.jpg");
+        setBackground("images/sky-dark.png");
     }
+    
 }
