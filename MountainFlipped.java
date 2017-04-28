@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MountainFlipped extends Mountain
 {
     
-    MountainFlipped(int x, int y) {
-        super(x, y);
+    MountainFlipped() {
+        super();
     }  
 }

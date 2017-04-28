@@ -20,8 +20,9 @@ public class TutorialScenario extends CameraWorld
     @Override()
     public void prepare() {
         setBackground("images/sky.jpg");
-        addObject(new DarkMountain(500, 300), 0, 0);
-        addObject(new Hero(0, 0), 0, 0);
+        addObject(new DarkMountain(), 0, 0);
+        addObject(new Hero(), 200, 200);
         
+
     }
 }

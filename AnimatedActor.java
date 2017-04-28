@@ -7,12 +7,12 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class AnimatedActor extends CameraActor
+public abstract class AnimatedActor extends ScrollingActor
 {
     Animation animation;
 
-    public AnimatedActor(int x, int y) {
-        super(x, y);
+    public AnimatedActor() {
+        super();
     }
     
     /**

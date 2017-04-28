@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class DarkForestFlipped extends Forest
 {
-    DarkForestFlipped(int x, int y) {
-        super(x, y);
+    DarkForestFlipped() {
+        super();
     }
 }

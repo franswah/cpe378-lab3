@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Mountain extends ParralaxActor
 {
-    Mountain(int x, int y) {
-        super(x, y);
+    Mountain() {
+        super();
         
     }
     

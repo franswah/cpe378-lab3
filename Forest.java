@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Forest extends ParralaxActor
 {
-    Forest(int x, int y) {
-        super(x, y);
+    Forest() {
+        super();
     }
     
     @Override()

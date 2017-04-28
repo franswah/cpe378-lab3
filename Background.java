@@ -1,26 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class StaticActor here.
+ * Write a description of class Background here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class StaticActor extends ScrollingActor
+public class Background extends ScrollingActor
 {
-    public StaticActor() {
-        super();
-    }
-        
-    public int getSpeed() {
-        return 1;
-    }
     /**
-     * Act - do whatever the StaticActor wants to do. This method is called whenever
+     * Act - do whatever the Background wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
         super.act();
+        ((CameraWorld)getWorld()).setWorldDimensions(getX(), getY(), getImage().getWidth(), getImage().getHeight());
     }    
 }

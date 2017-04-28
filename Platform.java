@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Platform extends StaticActor
 {
-     public Platform(int x, int y) {
-        super(x, y);
+     public Platform() {
+        super();
     }
     
     /**

@@ -9,8 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Grass extends Ground
 {
     
-    Grass(int x, int y) {
-        super(x, y);
+    Grass() {
+        super();
     }
     /**
      * Act - do whatever the Grass wants to do. This method is called whenever

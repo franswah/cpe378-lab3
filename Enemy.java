@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class Enemy extends MovingActor
 {
-     public Enemy(int x, int y) {
-        super(x, y);
+     public Enemy() {
+        super();
     }
     
 }

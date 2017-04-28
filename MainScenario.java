@@ -26,7 +26,7 @@ public class MainScenario extends CameraWorld
      */
     protected void prepare()
     {
-        Hero hero = new Hero(276,196);
-        addObject(hero,0,0);
+        Hero hero = new Hero();
+        addObject(hero,200,200);
     }
 }

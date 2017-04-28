@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Ground extends Platform
 {
-     public Ground(int x, int y) {
-        super(x, y);
+     public Ground() {
+        super();
         getImage().scale(50,50);
     }
 

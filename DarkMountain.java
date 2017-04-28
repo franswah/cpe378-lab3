@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class DarkMountain extends Mountain
 {
-    DarkMountain (int x, int y) {
-        super(x, y);
+    DarkMountain () {
+        super();
     }
   
 }

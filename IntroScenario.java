@@ -21,37 +21,17 @@ public class IntroScenario extends CameraWorld
     
     protected void prepare() {
         
-        addObject(new DarkMountain(500,300), 0,0);
-        addObject(new DarkMountainFlipped(1500, 300), 0, 0);
+        addObject(new DarkMountain(), 0,0);
+        addObject(new DarkMountainFlipped(), 0, 0);
         
-        addObject(new DarkForest(500,300), 0, 0);
-        addObject(new DarkForestFlipped(1500, 300), 0, 0);
+        addObject(new DarkForest(), 0, 0);
+        addObject(new DarkForestFlipped(), 0, 0);
 
         
-        
-        
-        addObject(new Grass(25, 575), 0, 0);
-        addObject(new Grass(75, 575), 0, 0);
-        addObject(new Grass(125, 575), 0, 0);
-        addObject(new Grass(175, 575), 0, 0);
-        addObject(new Grass(225, 575), 0, 0);
-        addObject(new Grass(275, 575), 0, 0);
-        addObject(new Grass(325, 575), 0, 0);
-        addObject(new Grass(375, 575), 0, 0);
-        addObject(new Grass(425, 575), 0, 0);
-        addObject(new Grass(475, 575), 0, 0);
-        addObject(new Grass(525, 575), 0, 0);
-        addObject(new Grass(575, 575), 0, 0);
-        addObject(new Grass(625, 575), 0, 0);
-        addObject(new Grass(675, 575), 0, 0);
-        addObject(new Grass(725, 575), 0, 0);
-        addObject(new Grass(775, 575), 0, 0);
-        addObject(new Grass(825, 575), 0, 0);
-        addObject(new Grass(875, 575), 0, 0);
-        addObject(new Grass(925, 575), 0, 0);
-        addObject(new Grass(975, 575), 0, 0);
+        setWorldDimensions(0,400,1000,800);
+ 
 
-        addObject(new Hero(0, 0), 0, 0);
+        addObject(new Hero(), 200, 200);
         setBackground("images/sky-dark.png");
     }
     

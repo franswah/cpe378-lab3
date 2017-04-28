@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Alligator extends Enemy
 {
-     public Alligator(int x, int y) {
-        super(x, y);
+     public Alligator() {
+        super();
     }
     
     /**

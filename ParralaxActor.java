@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ParralaxActor extends StaticActor
 {
-    ParralaxActor (int x, int y) {
-        super(x, y);
+    ParralaxActor () {
+        super();
     }
     /**
      * Act - do whatever the Parralax wants to do. This method is called whenever
