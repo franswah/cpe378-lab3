@@ -9,6 +9,8 @@ import java.util.*;
  */
 public abstract class AnimatedActor extends CameraActor
 {
+    Animation animation;
+
     public AnimatedActor(int x, int y) {
         super(x, y);
     }
@@ -20,35 +22,15 @@ public abstract class AnimatedActor extends CameraActor
     public void act() 
     {
         super.act();
-        setImage(getCurrentAnimationFrame());
-    }
-    
-    /**
-     * Filename should include a format string "%0nd" where n is the number of total digits in
-     * each filename.
-     * 
-     * Screw Greenfoot
-     * Min inclusive, max exclusive
-     */
-    public List<GreenfootImage> loadAnimationFrames(String genName, int min, int max)
-    {
-        List<GreenfootImage> frames = new ArrayList<GreenfootImage>();
-        for (int i = min; i < max; i++)
+        if (animation != null)
         {
-            String fileName = String.format(genName, i);
-            frames.add(new GreenfootImage(fileName));
+            setImage(animation.getNextFrame());
         }
-        
-        return frames;
+
     }
     
-    public void mirrorFramesHorizontally(List<GreenfootImage> frames)
+    public void setAnimation(Animation anim)
     {
-        for (GreenfootImage frame : frames)
-        {
-            frame.mirrorHorizontally();
-        }
+        this.animation = anim;
     }
-    
-    public abstract GreenfootImage getCurrentAnimationFrame();
 }

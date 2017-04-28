@@ -9,34 +9,19 @@ import java.util.*;
  */
 public class Hero extends MovingActor
 {
-    List<GreenfootImage> mL_frames;
-    List<GreenfootImage> mR_frames;
-    List<GreenfootImage> idleL_frames;
-    List<GreenfootImage> idleR_frames;
-    List<GreenfootImage> attackL_frames;
-    List<GreenfootImage> attackR_frames;
-    List<GreenfootImage> upL_frames;
-    List<GreenfootImage> upR_frames;
-    List<GreenfootImage> downL_frames;
-    List<GreenfootImage> downR_frames;
-    
+    Animation anim_walking;
+    Animation anim_idle;
     final int ANIMATION_OFFSET = 2;
     final int SPEED = 5;
-    
-    int currentFrame = 0;
+
     int offset = ANIMATION_OFFSET;
-    
+
     public Hero(int x, int y)
     {
         super(x, y);
         
-        mR_frames = loadAnimationFrames("WerewolfWalk/WerewolfWalk_%05d.png", 0, 17);
-        mL_frames = loadAnimationFrames("WerewolfWalk/WerewolfWalk_%05d.png", 0, 17);
-        mirrorFramesHorizontally(mL_frames);
-        
-        idleR_frames = loadAnimationFrames("WerewolfIdle/WerewolfIdle_%05d.png", 0, 3);
-        idleL_frames = loadAnimationFrames("WerewolfIdle/WerewolfIdle_%05d.png", 0, 3);
-        mirrorFramesHorizontally(idleL_frames);
+        anim_walking = new Animation("WerewolfWalk/WerewolfWalk_%05d.png", 16);
+        anim_idle = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
     }
     
     
@@ -52,30 +37,28 @@ public class Hero extends MovingActor
         
         if (--offset < 0)
         {
-            currentFrame++;
             offset = ANIMATION_OFFSET;
         }
         
         actualX = world.getCameraX() + 500;
         actualY = world.getCameraY() + 300;
         
-        if (Greenfoot.isKeyDown("d")){
+        if (Greenfoot.isKeyDown("d"))
+        {
             ((CameraWorld)getWorld()).moveX(SPEED);
+            setAnimation(anim_walking.setFlipped(false));
         }
-        else if (Greenfoot.isKeyDown("a")) {
+        else if (Greenfoot.isKeyDown("a")) 
+        {
             ((CameraWorld)getWorld()).moveX(-SPEED);
+            setAnimation(anim_walking.setFlipped(true));
+        }
+        else
+        {
+            setAnimation(anim_idle);
         }
     }    
     
-    public GreenfootImage getCurrentAnimationFrame()
-    {
-        if (currentFrame >= mL_frames.size())
-        {
-            currentFrame = 0;
-        }
-        
-        return mR_frames.get(currentFrame);
-    }
     
     public int getSpeed()
     {
