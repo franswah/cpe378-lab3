@@ -20,7 +20,7 @@ public class Hero extends MovingActor
     {
         super(x, y);
         
-        anim_walking = new Animation("WerewolfWalk/WerewolfWalk_%05d.png", 16);
+        anim_walking = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
         anim_idle = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
     }
     
