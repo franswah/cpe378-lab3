@@ -11,10 +11,10 @@ public class Hero extends MovingActor
 {
     Animation anim_walking;
     Animation anim_idle;
-    final int ANIMATION_OFFSET = 2;
     final int SPEED = 5;
-
-    int offset = ANIMATION_OFFSET;
+    
+    private boolean isWalking = false;
+    private boolean faceLeft = false;
 
     public Hero(int x, int y)
     {
@@ -35,28 +35,36 @@ public class Hero extends MovingActor
         
         CameraWorld world = (CameraWorld)getWorld();
         
-        if (--offset < 0)
-        {
-            offset = ANIMATION_OFFSET;
-        }
-        
         actualX = world.getCameraX() + 500;
         actualY = world.getCameraY() + 300;
         
         if (Greenfoot.isKeyDown("d"))
         {
             ((CameraWorld)getWorld()).moveX(SPEED);
-            setAnimation(anim_walking.setFlipped(false));
+            isWalking = true;
+            faceLeft = false;
         }
         else if (Greenfoot.isKeyDown("a")) 
         {
             ((CameraWorld)getWorld()).moveX(-SPEED);
-            setAnimation(anim_walking.setFlipped(true));
+            isWalking = true;
+            faceLeft = true;
+        }
+        else
+        {
+            isWalking = false;
+        }
+        
+        if (isWalking)
+        {
+            setAnimation(anim_walking);
         }
         else
         {
             setAnimation(anim_idle);
         }
+
+        getAnimation().setFlipped(faceLeft);
     }    
     
     

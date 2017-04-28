@@ -33,4 +33,9 @@ public abstract class AnimatedActor extends CameraActor
     {
         this.animation = anim;
     }
+    
+    public Animation getAnimation()
+    {
+        return animation;
+    }
 }

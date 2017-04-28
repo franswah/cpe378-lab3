@@ -8,4 +8,6 @@ comment2.target=void\ act()
 comment2.text=\r\n\ Act\ -\ do\ whatever\ the\ AnimatedActor\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
 comment3.params=anim
 comment3.target=void\ setAnimation(Animation)
-numComments=4
+comment4.params=
+comment4.target=Animation\ getAnimation()
+numComments=5

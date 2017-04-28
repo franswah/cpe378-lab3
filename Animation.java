@@ -40,9 +40,7 @@ public class Animation
         flippedFrames = new ArrayList<GreenfootImage>();
         for (GreenfootImage frame : frames)
         {
-            GreenfootImage flipped = new GreenfootImage(frame);
-            flipped.mirrorHorizontally();
-            flippedFrames.add(flipped);
+            flippedFrames.add(getMirroredImage(frame));
         }
 
         currentFrames = frames;
@@ -87,5 +85,17 @@ public class Animation
     public GreenfootImage getCurrentFrame()
     {
         return currentFrames.get(currentFrame);
+    }
+    
+    public static GreenfootImage getMirroredImage(GreenfootImage original)
+    {
+        GreenfootImage mirrored = new GreenfootImage(original.getWidth(), original.getHeight());
+        for (int y=0; y<original.getHeight(); y++) for (int x=0; x<original.getWidth(); x++)
+        {
+            Color color = original.getColorAt(x, y);
+            int n = original.getWidth()-x-1;
+            mirrored.setColorAt(n, y, color);
+        }
+        return mirrored;
     }
 }
