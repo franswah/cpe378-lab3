@@ -6,8 +6,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class ParralaxActor extends StaticActor
+public class ParralaxActor extends Actor
 {
+    private int initialX;
+    private int initialY;
+    
     ParralaxActor () {
         super();
     }
@@ -18,11 +21,21 @@ public class ParralaxActor extends StaticActor
     public void act() 
     {
         super.act();
+        
+        CameraWorld world = (CameraWorld) getWorld();
+        setLocation(initialX - (world.getCameraX() / getRatio()), initialY - (world.getCameraY() / getRatio()));
     }
     
-    @Override()
-    public int getSpeed() {
-        return 10;
+    @Override
+    protected void addedToWorld(World world)
+    {
+        super.addedToWorld(world);
+        initialX = getX();
+        initialY = getY();
     }
-
+    
+    public int getRatio()
+    {
+        return 4;
+    }
 }

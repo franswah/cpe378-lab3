@@ -15,6 +15,7 @@ public class TutorialScenario extends CameraWorld
      */
     public TutorialScenario()
     {
+        super(2000, 600);
     }
     
     @Override()

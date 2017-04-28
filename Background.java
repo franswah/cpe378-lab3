@@ -15,6 +15,6 @@ public class Background extends ScrollingActor
     public void act() 
     {
         super.act();
-        ((CameraWorld)getWorld()).setWorldDimensions(getX(), getY(), getImage().getWidth(), getImage().getHeight());
+        
     }    
 }

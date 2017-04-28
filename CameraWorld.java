@@ -1,3 +1,5 @@
+import javax.net.ssl.ExtendedSSLSession;
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -8,7 +10,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class CameraWorld extends World
 {
-    private int cameraX = 0;
+    public static final int WINDOW_WIDTH = 1000;
+    public static final int WINDOW_HEIGHT = 600;
+
+    private int cameraX = 50;
     private int cameraY = 0;
     
     private int worldWidth;
@@ -20,22 +25,24 @@ public abstract class CameraWorld extends World
      * Constructor for objects of class CameraWorld.
      * 
      */
-    public CameraWorld()
+    public CameraWorld(int worldWidth, int worldHeight)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1000, 600, 1);
-        prepare();
+        super(WINDOW_WIDTH, WINDOW_HEIGHT, 1, false);
         
-        worldWidth = getWidth();
-        worldHeight = getHeight();
-        worldX = 0;
-        worldY = 0;
+        this.worldWidth = worldWidth;
+        this.worldHeight = worldHeight;
+
+        prepare();
+    }
+
+    public void act()
+    {
+        super.act();
     }
     
-    public void setWorldDimensions(int x, int y, int width, int height)
+    public void setWorldDimensions(int width, int height)
     {
-        worldX = x;
-        worldY = y;
         worldWidth = width;
         worldHeight = height;
     }
@@ -50,22 +57,58 @@ public abstract class CameraWorld extends World
         return cameraY;
     }
     
-    public void setCameraX(int x) {
-        cameraX = x;
-    }
-    
-    public void setCameraY(int y) {
-        cameraY = y;
-    }
-    
-    public int getX()
+    public void setCameraX(int x) 
     {
-        return worldX;
+        // Make sure camera stays within bounds of the world.
+        if (x < 0)
+        {
+            cameraX = 0;
+        }
+        else if (x > (worldWidth - WINDOW_WIDTH))
+        {
+            cameraX = worldWidth - WINDOW_WIDTH;
+        }
+        else
+        {
+            cameraX = x;
+        }
     }
     
-    public int getY()
+    public void setCameraY(int y) 
     {
-        return worldY;
+        if (y < 0)
+        {
+            cameraY = 0;
+        }
+        else if (y > (worldHeight - WINDOW_HEIGHT))
+        {
+            cameraY = worldHeight - WINDOW_HEIGHT;
+        }
+        else
+        {
+            cameraY = y;
+        }
+    }
+
+    public int getCameraWidth()
+    {
+        return WINDOW_WIDTH;
+    }
+
+    public int getCameraHeight()
+    {
+        return WINDOW_HEIGHT;
+    }
+    
+    // Get the Actor's position relative to the entire world as opposed to relative to the camera
+    public int getActorX(Actor a)
+    {
+        return a.getX() + cameraX;
+    }
+    
+    public int getActorY(Actor a)
+    {
+        return a.getY() + cameraY;
     }
     
     public int getWidth()

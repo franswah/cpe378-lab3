@@ -13,7 +13,7 @@ public class Mountain extends ParralaxActor
         
     }
     
-    public int getSpeed() {
-        return 30;
+    public int getRatio() {
+        return 10;
     }
 }

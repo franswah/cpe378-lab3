@@ -16,7 +16,7 @@ public class MainScenario extends CameraWorld
     public MainScenario()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(); 
+        super(2000, 600); 
         prepare();
     }
 
@@ -28,5 +28,17 @@ public class MainScenario extends CameraWorld
     {
         Hero hero = new Hero();
         addObject(hero,200,200);
+
+        insertGround(0, getWidth());
+    }
+
+    private void insertGround(int start, int end)
+    {
+        GreenfootImage block = new Ground().getImage();
+
+        for (int i = start; i < end; i+= block.getWidth())
+        {
+            addObject(new Ground(), i, 400);
+        }
     }
 }

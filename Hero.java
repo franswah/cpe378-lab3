@@ -13,8 +13,7 @@ public class Hero extends MovingActor
     Animation anim_idle;
     final int SPEED = 7;
 
-    private static final int SCROLL_WIDTH = 160;
-    private int absoluteScroll, initialXPosition, initialYPosition;
+    private static final int SCROLL_WIDTH = 250;
     
     private boolean faceLeft = false;
 
@@ -23,14 +22,7 @@ public class Hero extends MovingActor
         anim_walking = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
         anim_idle = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
     }
-    
-    @Override
-    protected void addedToWorld(World world)
-    {
-        initialXPosition = getX();
-        initialYPosition = getY();
-    }
-    
+
     /**
      * Act - do whatever the Hero wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -68,19 +60,16 @@ public class Hero extends MovingActor
 
         getAnimation().setFlipped(faceLeft);
 
-        world.setCameraX(0);
-        world.setCameraY(0);
-
         // Scrolling
-        if((getX() < SCROLL_WIDTH) && (world.getX() < world.getWidth() / 2 - 5))
+        if(getX() < SCROLL_WIDTH)
         {
-            world.setCameraX(SCROLL_WIDTH - getX());
-            absoluteScroll += SCROLL_WIDTH - getX();
+            world.setCameraX(world.getCameraX() - (SCROLL_WIDTH - getX()));
+            setLocation(SCROLL_WIDTH, getY());
         }
-        else if((getX() > world.getWidth() - SCROLL_WIDTH) && (world.getX() > -690))
+        else if(getX() > world.WINDOW_WIDTH - SCROLL_WIDTH)
         {
-            world.setCameraX(world.getWidth() - SCROLL_WIDTH - getX());
-            absoluteScroll += world.getWidth() - SCROLL_WIDTH - getX();
+            world.setCameraX(world.getCameraX() + (SCROLL_WIDTH - (world.WINDOW_WIDTH - getX())));
+            setLocation(world.WINDOW_WIDTH - SCROLL_WIDTH, getY());
         }
     }    
     

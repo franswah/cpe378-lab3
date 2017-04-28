@@ -7,7 +7,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class AnimatedActor extends ScrollingActor
+public abstract class AnimatedActor extends Actor
 {
     Animation animation;
 
