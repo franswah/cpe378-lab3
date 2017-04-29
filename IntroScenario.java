@@ -16,16 +16,17 @@ public class IntroScenario extends CameraWorld
     public IntroScenario()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(2000, 600);
+        super(25000, 600);
     }
     
     protected void prepare() {
         
-        addObject(new DarkMountain(), 400,400);
-        addObject(new DarkMountainFlipped(), 1200, 400);
+        addObject(new DarkMountain(), 400,300);
+        addObject(new DarkMountainFlipped(), 1400, 300);
         
-        addObject(new DarkForest(), 400, 400);
-        addObject(new DarkForestFlipped(), 1200, 400);
+        addObject(new DarkForest(), 400, 350);
+        addObject(new DarkForestFlipped(), 1400, 350);
+        addObject(new DarkForest(), 2400, 350);
  
 
         addObject(new Hero(), 400, 0);

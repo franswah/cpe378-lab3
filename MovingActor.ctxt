@@ -16,4 +16,6 @@ comment6.params=vY
 comment6.target=void\ setVY(int)
 comment7.params=
 comment7.target=int\ getSpeed()
-numComments=8
+comment8.params=
+comment8.target=boolean\ isGrounded()
+numComments=9
