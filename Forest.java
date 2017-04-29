@@ -11,4 +11,8 @@ public class Forest extends ParralaxActor
     Forest() {
         super();
     }
+    
+    public int getRatio() {
+        return 10;
+    }
 }

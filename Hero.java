@@ -9,18 +9,22 @@ import java.util.*;
  */
 public class Hero extends MovingActor
 {
-    Animation anim_walking;
-    Animation anim_idle;
-    final int SPEED = 7;
+    Animation walkingAnimation;
+    Animation idleAnimation;
+    public final int speed = 7;
 
-    private static final int SCROLL_WIDTH = 250;
+    public static final int scrollWidth = 250;
     
     private boolean faceLeft = false;
+    private boolean isJumping = false;
+    private boolean isFalling = false;
+    private int maxJump = 10;
+    private int jumpCount = 0;
 
     public Hero()
     {        
-        anim_walking = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
-        anim_idle = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
+        walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
+        idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
     }
 
     /**
@@ -30,19 +34,24 @@ public class Hero extends MovingActor
     public void act() 
     {
         super.act();
+      
+        move();
+        jump();
+        fall();
+        scroll();
         
-        CameraWorld world = (CameraWorld)getWorld();
-        
-        
+    }    
+    
+    private void move() {
         if (Greenfoot.isKeyDown("d"))
         {
             faceLeft = false;
-            setVX(SPEED);
+            setVX(speed);
         }
         else if (Greenfoot.isKeyDown("a")) 
         {
             faceLeft = true;
-            setVX(-SPEED);
+            setVX(-speed);
         }
         else
         {
@@ -51,31 +60,60 @@ public class Hero extends MovingActor
         
         if (isMoving)
         {
-            setAnimation(anim_walking);
+            setAnimation(walkingAnimation);
         }
         else
         {
-            setAnimation(anim_idle);
+            setAnimation(idleAnimation);
         }
-
+        
         getAnimation().setFlipped(faceLeft);
-
-        // Scrolling
-        if(getX() < SCROLL_WIDTH)
-        {
-            world.setCameraX(world.getCameraX() - (SCROLL_WIDTH - getX()));
-            setLocation(SCROLL_WIDTH, getY());
-        }
-        else if(getX() > world.WINDOW_WIDTH - SCROLL_WIDTH)
-        {
-            world.setCameraX(world.getCameraX() + (SCROLL_WIDTH - (world.WINDOW_WIDTH - getX())));
-            setLocation(world.WINDOW_WIDTH - SCROLL_WIDTH, getY());
-        }
-    }    
+    }
     
+    private void scroll() {
+        CameraWorld world = (CameraWorld)getWorld();
+         if(getX() < scrollWidth)
+        {
+            world.setCameraX(world.getCameraX() - (scrollWidth - getX()));
+            setLocation(scrollWidth, getY());
+        }
+        else if(getX() > world.WINDOW_WIDTH - scrollWidth)
+        {
+            world.setCameraX(world.getCameraX() + (scrollWidth - (world.WINDOW_WIDTH - getX())));
+            setLocation(world.WINDOW_WIDTH - scrollWidth, getY());
+        }
+    }
+    
+    private void fall() {
+        
+        if (!super.isGrounded() && !isJumping)
+        {   
+            setLocation(getX(), getY() + 10);
+            
+        }
+    }
+  
+    private void jump() {
+        
+        
+        if(Greenfoot.getKey() == "space" && super.isGrounded()) {
+            isJumping = true;
+        }
+        
+        if(isJumping) {
+            setLocation(getX(), getY() - 15);
+            jumpCount++;
+            
+            if(jumpCount == maxJump) {
+                isJumping = false;
+                jumpCount = 0;
+            }
+        }
+    }
     
     public int getSpeed()
     {
-        return SPEED;
+        return speed;
     }
+
 }

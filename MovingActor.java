@@ -18,6 +18,7 @@ public abstract class MovingActor extends AnimatedActor
     
     private int vX = 0;
     private int vY = 0;
+    private int speed = 0;
     
     /**
      * Act - do whatever the MovingActor wants to do. This method is called whenever
@@ -29,15 +30,14 @@ public abstract class MovingActor extends AnimatedActor
 
         setLocation(getX() + vX, getY() + vY);
         
-        Actor ground = getOneIntersectingObject(Ground.class);
-        
-        if (ground != null)
-        {
-            
-        }
 
-        if (vX != 0) isMoving = true;
-        else isMoving = false;
+       
+        if (vX != 0) {
+            isMoving = true;
+        }
+        else {
+            isMoving = false;
+        }
     }
     
     
@@ -63,4 +63,8 @@ public abstract class MovingActor extends AnimatedActor
     }
     
     public abstract int getSpeed();
+    public boolean isGrounded() {
+        Actor ground = getOneIntersectingObject(Ground.class);
+        return ground != null;
+    }
 }

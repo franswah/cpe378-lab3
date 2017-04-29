@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=Animation
+comment0.text=\n\ Write\ a\ description\ of\ class\ Animation\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=formattedPath\ maxNum
+comment1.target=Animation(java.lang.String,\ int)
+comment1.text=\ \n\ The\ formattedPath\ should\ include\ a\ format\ string\ "%0nd"\ where\ n\ is\ the\ number\ of\ total\ digits\ in\n\ each\ file\ for\ the\ animation.\n\ \n\ maxNum\ is\ the\ max\ number\ on\ the\ file\ name\ inclusive.\ Frames\ are\ assumed\ numbered\ 0\ to\ n\n
+comment2.params=flip
+comment2.target=Animation\ setFlipped(boolean)
+comment3.params=d
+comment3.target=void\ setDelay(int)
+comment4.params=
+comment4.target=greenfoot.GreenfootImage\ getNextFrame()
+comment4.text=\n\ Advances\ the\ current\ frame\ depending\ on\ counter\ and\ speed\n
+comment5.params=
+comment5.target=greenfoot.GreenfootImage\ getCurrentFrame()
+comment6.params=original
+comment6.target=greenfoot.GreenfootImage\ getMirroredImage(greenfoot.GreenfootImage)
+numComments=7

@@ -36,6 +36,16 @@ public class Animation
             String fileName = String.format(formattedPath, i);
             frames.add(new GreenfootImage(fileName));
         }
+        
+        for(GreenfootImage frame : frames) {
+            int height = frame.getHeight();
+            
+            int width = frame.getWidth();
+            int ratio = width / 100;
+             
+             frame.scale(100,  Integer.valueOf((frame.getHeight() / ratio)));
+   
+        }
 
         flippedFrames = new ArrayList<GreenfootImage>();
         for (GreenfootImage frame : frames)
@@ -43,6 +53,8 @@ public class Animation
             flippedFrames.add(getMirroredImage(frame));
         }
 
+        
+        
         currentFrames = frames;
     }
 

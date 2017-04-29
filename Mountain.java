@@ -14,6 +14,6 @@ public class Mountain extends ParralaxActor
     }
     
     public int getRatio() {
-        return 10;
+        return 20;
     }
 }

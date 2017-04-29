@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class ParralaxActor extends Actor
+abstract class ParralaxActor extends Actor
 {
     private int initialX;
     private int initialY;
@@ -34,8 +34,5 @@ public class ParralaxActor extends Actor
         initialY = getY();
     }
     
-    public int getRatio()
-    {
-        return 4;
-    }
+    abstract public int getRatio();
 }
