@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Fri Apr 28 18:48:23 PDT 2017
+#Fri Apr 28 19:17:17 PDT 2017
 target16.name=IntroScenario
 target26.width=100
 target2.name=StaticActor
@@ -218,7 +218,7 @@ target10.typeParameters=
 target8.typeParameters=
 dependency12.to=DarkForestFlipped
 class.Grass.image=ground.jpg
-class.Ground.image=ground.jpg
+class.Ground.image=ground.png
 dependency4.type=UsesDependency
 dependency1.from=TutorialScenario
 target22.showInterface=false
