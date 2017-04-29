@@ -28,7 +28,12 @@ public class IntroScenario extends CameraWorld
         addObject(new DarkForestFlipped(), 1400, 350);
         addObject(new DarkForest(), 2400, 350);
  
-
+        
+        DialogModal modal = new DialogModal("Hello");
+        
+        addObject(modal, 400, 400);
+        
+        
         addObject(new Hero(), 400, 0);
         setBackground("images/sky-dark.png");
 
