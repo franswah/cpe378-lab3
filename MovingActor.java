@@ -12,12 +12,12 @@ public abstract class MovingActor extends AnimatedActor
         super();
     }
     
-    private final float G = 9.8f;
+    protected final float G = 2.5f;
 
     protected boolean isMoving = false;
     
     private int vX = 0;
-    private int vY = 0;
+    protected int vY = 0;
     private int speed = 0;
     
     /**
@@ -30,7 +30,7 @@ public abstract class MovingActor extends AnimatedActor
 
         setLocation(getX() + vX, getY() + vY);
         
-
+        fall();
        
         if (vX != 0) {
             isMoving = true;
@@ -63,8 +63,23 @@ public abstract class MovingActor extends AnimatedActor
     }
     
     public abstract int getSpeed();
+    
+    private void fall() {
+        
+        if (!isGrounded())
+        {   
+            vY += G;
+            
+        }
+        else {
+            Actor ground = getOneObjectAtOffset(0,5 + getImage().getHeight()/2, Ground.class);
+            setLocation(getX(),ground.getY() - (ground.getImage().getHeight() / 2 + getImage().getHeight() / 2));
+            vY = 0;
+        }
+    }
+    
     public boolean isGrounded() {
-        Actor ground = getOneIntersectingObject(Ground.class);
+        Actor ground = getOneObjectAtOffset(0,5 + getImage().getHeight()/2, Ground.class);
         return ground != null;
     }
 }

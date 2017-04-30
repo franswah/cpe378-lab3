@@ -7,13 +7,17 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Hero extends MovingActor
+public class Hero extends BattleActor
 {
     Animation walkingAnimation;
     Animation idleAnimation;
     public final int speed = 7;
+    private final int jump = 30;
+    private final int attackRange = 150;
 
     public static final int scrollWidth = 250;
+    
+    private DialogModal healthDialog;
     
     private boolean faceLeft = false;
     private boolean isJumping = false;
@@ -25,6 +29,15 @@ public class Hero extends MovingActor
     {        
         walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
         idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
+        strength = 10;
+        defense = 3;
+        attackDelay = 20;
+    }
+    
+    @Override public void addedToWorld(World world) {
+        super.addedToWorld(world);
+        healthDialog = new DialogModal("Health: " + health);
+        world.addObject(healthDialog, healthDialog.getImage().getWidth() / 2, healthDialog.getImage().getHeight() / 2);
     }
 
     /**
@@ -37,9 +50,8 @@ public class Hero extends MovingActor
       
         move();
         jump();
-        fall();
+        attack();
         scroll();
-        
     }    
     
     private void move() {
@@ -83,37 +95,49 @@ public class Hero extends MovingActor
             setLocation(world.WINDOW_WIDTH - scrollWidth, getY());
         }
     }
-    
-    private void fall() {
-        
-        if (!super.isGrounded() && !isJumping)
-        {   
-            setLocation(getX(), getY() + 10);
-            
-        }
-    }
   
     private void jump() {
-        
-        
+ 
         if(Greenfoot.getKey() == "space" && super.isGrounded()) {
-            isJumping = true;
-        }
-        
-        if(isJumping) {
-            setLocation(getX(), getY() - 15);
-            jumpCount++;
-            
-            if(jumpCount == maxJump) {
-                isJumping = false;
-                jumpCount = 0;
-            }
-        }
+            vY = -jump; }
+
     }
     
     public int getSpeed()
     {
         return speed;
     }
-
+    
+    @Override
+    public void attack() {
+        super.attack();
+        if (Greenfoot.isKeyDown("j") && attackFrame == attackDelay) {
+            for (BattleActor enemy : getObjectsInRange(attackRange, BattleActor.class)) {
+                if (enemy.getX() > getX() && !faceLeft) {
+                    enemy.damage(strength);
+                }
+                else if (enemy.getX() < getX() && faceLeft) {
+                    enemy.damage(strength);
+                }
+                else if (enemy.getX() == getX()) {
+                    enemy.damage(strength);
+                }
+            }
+            attackFrame = 0;
+        }
+    }
+    
+    @Override
+    public void damage(int dmg) {
+        health = health - (dmg - defense);
+        healthDialog.setText("Health: " + Math.max(health, 0));
+        
+        // Play damage animation?
+      
+        if (health <= 0) {
+            World wrld = getWorld();
+            wrld.addObject(new DialogModal("You died.\nR.I.P. Lukas"), getX(), wrld.getHeight()/2);
+            wrld.removeObject(this);
+        }
+    }
 }

@@ -35,9 +35,14 @@ public class IntroScenario extends CameraWorld
         
         
         addObject(new Hero(), 400, 0);
+        addObject(new Alligator(), 1000, 0);
         setBackground("images/sky-dark.png");
 
         insertGround(0, getWidth(), 600);
+        
+        // Plays music the entire time this scene is running. Uncomment if you want to hear the same minute looped over and over.
+        //GreenfootSound loop = new GreenfootSound("noGuitar.wav");
+        //loop.playLoop();
     }
 
     private void insertGround(int start, int end, int height)
