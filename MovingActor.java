@@ -18,7 +18,13 @@ public abstract class MovingActor extends AnimatedActor
     
     private int vX = 0;
     protected int vY = 0;
+    
+    protected int worldX;
+    protected int worldY;
+    
     private int speed = 0;
+    
+    protected boolean scrolls = true;
     
     /**
      * Act - do whatever the MovingActor wants to do. This method is called whenever
@@ -28,7 +34,17 @@ public abstract class MovingActor extends AnimatedActor
     {
         super.act();
 
-        setLocation(getX() + vX, getY() + vY);
+        if (scrolls)
+        {
+            worldX += vX;
+            worldY += vY;
+            CameraWorld world = (CameraWorld) getWorld();
+            setLocation(worldX - world.getCameraX(), worldY - world.getCameraY());
+        }
+        else
+        {
+            setLocation(getX() + vX, getY() + vY);
+        }
         
         fall();
        
@@ -81,5 +97,13 @@ public abstract class MovingActor extends AnimatedActor
     public boolean isGrounded() {
         Actor ground = getOneObjectAtOffset(0,5 + getImage().getHeight()/2, Ground.class);
         return ground != null;
+    }
+    
+     @Override
+    protected void addedToWorld(World world)
+    {
+        super.addedToWorld(world);
+        worldX = getX();
+        worldY = getY();
     }
 }

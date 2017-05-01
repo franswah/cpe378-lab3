@@ -27,7 +27,7 @@ public class Alligator extends Enemy
         attack();
     }    
     public int getSpeed() {
-        return 1;
+        return 2;
     }
     
     public GreenfootImage getCurrentAnimationFrame() {
@@ -37,10 +37,10 @@ public class Alligator extends Enemy
     private void move() {
         for (Hero hero : getObjectsInRange(1000,Hero.class)) {
             if (hero.getX() < getX()) {
-                setLocation(getX() - moveSpeed, getY());
+                setVX(-moveSpeed);
             }
             else if (hero.getX() > getX()) {
-                setLocation(getX() + moveSpeed, getY());
+                setVX(moveSpeed);
             }
         }
     }

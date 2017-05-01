@@ -41,6 +41,8 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         strength = 10;
         defense = 3;
         attackDelay = 20;
+        
+        scrolls = false;
     }
     
     @Override public void addedToWorld(World world) {

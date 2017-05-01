@@ -9,7 +9,7 @@ import java.util.*;
  */
 public abstract class AnimatedActor extends Actor
 {
-    Animation animation;
+    Animation animation;  
 
     public AnimatedActor() {
         super();
@@ -26,7 +26,6 @@ public abstract class AnimatedActor extends Actor
         {
             setImage(animation.getNextFrame());
         }
-
     }
     
     public void setAnimation(Animation anim)
@@ -38,4 +37,6 @@ public abstract class AnimatedActor extends Actor
     {
         return animation;
     }
+    
+    
 }
