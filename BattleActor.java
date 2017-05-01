@@ -13,6 +13,7 @@ public abstract class BattleActor extends MovingActor
     protected int defense = 1;
     protected int attackDelay = 10;
     protected int attackFrame = 0;
+    protected boolean isAttacking = false;
     
     /**
      * Act - do whatever the BattleActor wants to do. This method is called whenever

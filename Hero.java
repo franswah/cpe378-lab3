@@ -7,10 +7,11 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Hero extends BattleActor
+public class Hero extends BattleActor implements Animation.AnimationCompleteListener
 {
     Animation walkingAnimation;
     Animation idleAnimation;
+    Animation attackAnimation;
     public final int speed = 7;
     private final int jump = 30;
     private final int attackRange = 150;
@@ -20,15 +21,23 @@ public class Hero extends BattleActor
     private DialogModal healthDialog;
     
     private boolean faceLeft = false;
-    private boolean isJumping = false;
-    private boolean isFalling = false;
+    
+
     private int maxJump = 10;
     private int jumpCount = 0;
+
+    private enum Status {IDLE, WALKING, FALLING, ATTACKING, JUMPING, ASCENDING}
+
+    private Status currently = Status.IDLE;
 
     public Hero()
     {        
         walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
         idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
+        attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4);
+
+        attackAnimation.setAnimationCompleteListener(this);
+        
         strength = 10;
         defense = 3;
         attackDelay = 20;
@@ -52,6 +61,7 @@ public class Hero extends BattleActor
         jump();
         attack();
         scroll();
+        animate();
     }    
     
     private void move() {
@@ -59,27 +69,28 @@ public class Hero extends BattleActor
         {
             faceLeft = false;
             setVX(speed);
+            if (currently != Status.ATTACKING && currently != Status.JUMPING) 
+            {
+                currently = Status.WALKING;
+            }
         }
         else if (Greenfoot.isKeyDown("a")) 
         {
             faceLeft = true;
             setVX(-speed);
+            if (currently != Status.ATTACKING && currently != Status.JUMPING) 
+            {
+                currently = Status.WALKING;
+            }
         }
         else
         {
             setVX(0);
+            if (currently != Status.ATTACKING && currently != Status.JUMPING) 
+            {
+                currently = Status.IDLE;
+            }
         }
-        
-        if (isMoving)
-        {
-            setAnimation(walkingAnimation);
-        }
-        else
-        {
-            setAnimation(idleAnimation);
-        }
-        
-        getAnimation().setFlipped(faceLeft);
     }
     
     private void scroll() {
@@ -111,7 +122,9 @@ public class Hero extends BattleActor
     @Override
     public void attack() {
         super.attack();
-        if (Greenfoot.isKeyDown("j") && attackFrame == attackDelay) {
+        if (Greenfoot.isKeyDown("j") && currently != Status.ATTACKING) {
+            currently = Status.ATTACKING;
+
             for (BattleActor enemy : getObjectsInRange(attackRange, BattleActor.class)) {
                 if (enemy.getX() > getX() && !faceLeft) {
                     enemy.damage(strength);
@@ -123,8 +136,28 @@ public class Hero extends BattleActor
                     enemy.damage(strength);
                 }
             }
-            attackFrame = 0;
         }
+    }
+
+    public void animate()
+    {
+        switch(currently) 
+        {
+            case IDLE:
+                setAnimation(idleAnimation);
+                break;
+            case WALKING:
+                setAnimation(walkingAnimation);
+                break;
+            case ATTACKING:
+                setAnimation(attackAnimation);
+                break;
+            default:
+                setAnimation(idleAnimation);
+                break;
+        }
+
+        getAnimation().setFlipped(faceLeft);
     }
     
     @Override
@@ -138,6 +171,15 @@ public class Hero extends BattleActor
             World wrld = getWorld();
             wrld.addObject(new DialogModal("You died.\nR.I.P. Lukas"), getX(), wrld.getHeight()/2);
             wrld.removeObject(this);
+        }
+    }
+
+    @Override
+    public void animationCompleted(Animation animation)
+    {
+        if (animation == attackAnimation) 
+        {
+            currently = Status.IDLE;
         }
     }
 }
