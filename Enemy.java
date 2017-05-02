@@ -6,10 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class Enemy extends MovingActor
-{
+public abstract class Enemy extends BattleActor
+{   
      public Enemy() {
         super();
     }
-    
 }

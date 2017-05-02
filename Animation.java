@@ -20,6 +20,8 @@ public class Animation
     private int currentFrame = 0;
     private int counter = delay;
 
+    private AnimationCompleteListener  completeListener = null;
+
     /** 
      * The formattedPath should include a format string "%0nd" where n is the number of total digits in
      * each file for the animation.
@@ -77,6 +79,11 @@ public class Animation
         this.delay = d;
     }
 
+    public void setAnimationCompleteListener(AnimationCompleteListener listener)
+    {
+        this.completeListener = listener;
+    }
+
     /**
       * Advances the current frame depending on counter and speed
      */
@@ -88,6 +95,11 @@ public class Animation
             if (++currentFrame >= numFrames)
             {
                 currentFrame = 0;
+
+                if (completeListener != null) 
+                {
+                    completeListener.animationCompleted(this);
+                }
             }
         }
 
@@ -97,6 +109,11 @@ public class Animation
     public GreenfootImage getCurrentFrame()
     {
         return currentFrames.get(currentFrame);
+    }
+
+    public int getFrameNumber()
+    {
+        return currentFrame;
     }
     
     public static GreenfootImage getMirroredImage(GreenfootImage original)
@@ -109,5 +126,10 @@ public class Animation
             mirrored.setColorAt(n, y, color);
         }
         return mirrored;
+    }
+
+    public interface AnimationCompleteListener
+    {
+        public void animationCompleted(Animation animation);
     }
 }

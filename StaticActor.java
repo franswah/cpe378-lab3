@@ -6,8 +6,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class StaticActor extends ScrollingActor
+public class StaticActor extends AnimatedActor
 {
+    private int initialX;
+    private int initialY;
+    
     public StaticActor() {
         super();
     }
@@ -20,5 +23,16 @@ public class StaticActor extends ScrollingActor
     public void act() 
     {
         super.act();
-    }    
+        
+        CameraWorld world = (CameraWorld) getWorld();
+        setLocation(initialX - world.getCameraX(), initialY - world.getCameraY());
+    } 
+    
+    @Override
+    protected void addedToWorld(World world)
+    {
+        super.addedToWorld(world);
+        initialX = getX();
+        initialY = getY();
+    }
 }

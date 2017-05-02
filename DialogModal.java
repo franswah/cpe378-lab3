@@ -53,5 +53,16 @@ public class DialogModal extends Actor
                 container.scale(container.getWidth() - 10, container.getHeight() - 10);  
             }
         }
-    }    
+    }
+    
+    public void setText(String txt) {
+        image = new GreenfootImage(txt, defaultFontSize, Color.WHITE, Color.BLACK);
+        int width = image.getWidth();
+        int height = image.getHeight();
+        
+        container.setColor(Color.BLACK);
+        container.fill();
+        container.drawImage(image, padding, padding);
+        setImage(container);
+    }
 }

@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.target=CameraWorld
-comment0.text=\n\ Write\ a\ description\ of\ class\ CameraWorld\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ CameraWorld\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=worldWidth\ worldHeight
 comment1.target=CameraWorld(int,\ int)
-comment1.text=\n\ Constructor\ for\ objects\ of\ class\ CameraWorld.\n\ \n
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ CameraWorld.\r\n\ \r\n
 comment10.params=
 comment10.target=int\ getCameraHeight()
 comment11.params=a

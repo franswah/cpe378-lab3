@@ -12,13 +12,19 @@ public abstract class MovingActor extends AnimatedActor
         super();
     }
     
-    private final float G = 9.8f;
+    protected final float G = 2.5f;
 
     protected boolean isMoving = false;
     
     private int vX = 0;
-    private int vY = 0;
+    protected int vY = 0;
+    
+    protected int worldX;
+    protected int worldY;
+    
     private int speed = 0;
+    
+    protected boolean scrolls = true;
     
     /**
      * Act - do whatever the MovingActor wants to do. This method is called whenever
@@ -28,9 +34,19 @@ public abstract class MovingActor extends AnimatedActor
     {
         super.act();
 
-        setLocation(getX() + vX, getY() + vY);
+        if (scrolls)
+        {
+            worldX += vX;
+            worldY += vY;
+            CameraWorld world = (CameraWorld) getWorld();
+            setLocation(worldX - world.getCameraX(), worldY - world.getCameraY());
+        }
+        else
+        {
+            setLocation(getX() + vX, getY() + vY);
+        }
         
-
+        fall();
        
         if (vX != 0) {
             isMoving = true;
@@ -63,8 +79,31 @@ public abstract class MovingActor extends AnimatedActor
     }
     
     public abstract int getSpeed();
+    
+    private void fall() {
+        
+        if (!isGrounded())
+        {   
+            vY += G;
+            
+        }
+        else {
+            Actor ground = getOneObjectAtOffset(0,5 + getImage().getHeight()/2, Ground.class);
+            setLocation(getX(),ground.getY() - (ground.getImage().getHeight() / 2 + getImage().getHeight() / 2));
+            vY = 0;
+        }
+    }
+    
     public boolean isGrounded() {
-        Actor ground = getOneIntersectingObject(Ground.class);
+        Actor ground = getOneObjectAtOffset(0,5 + getImage().getHeight()/2, Ground.class);
         return ground != null;
+    }
+    
+     @Override
+    protected void addedToWorld(World world)
+    {
+        super.addedToWorld(world);
+        worldX = getX();
+        worldY = getY();
     }
 }

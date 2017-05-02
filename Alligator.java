@@ -8,8 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Alligator extends Enemy
 {
+    private int moveSpeed = 2;
+    
      public Alligator() {
         super();
+        strength = 5;
+        defense = 2;
     }
     
     /**
@@ -19,12 +23,35 @@ public class Alligator extends Enemy
     public void act() 
     {
         super.act();
+        move();
+        attack();
     }    
     public int getSpeed() {
-        return 1;
+        return 2;
     }
     
     public GreenfootImage getCurrentAnimationFrame() {
         return getImage();
+    }
+    
+    private void move() {
+        for (Hero hero : getObjectsInRange(1000,Hero.class)) {
+            if (hero.getX() < getX()) {
+                setVX(-moveSpeed);
+            }
+            else if (hero.getX() > getX()) {
+                setVX(moveSpeed);
+            }
+        }
+    }
+    
+    public void attack() {
+        super.attack();
+        Hero hero = (Hero)getOneIntersectingObject(Hero.class);
+        
+        if (hero != null && attackFrame == attackDelay) {
+            hero.damage(strength);
+            attackFrame = 0;
+        }
     }
 }
