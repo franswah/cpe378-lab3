@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Wed May 03 20:26:49 PDT 2017
+#Thu May 04 10:54:21 PDT 2017
 target16.name=AnimatedActor
 dependency35.to=CameraWorld
 target26.width=110
@@ -53,7 +53,7 @@ class.DarkMountain.image=mountain-dark.png
 class.DialogModal.superclass=greenfoot.Actor
 target27.showInterface=false
 target18.width=80
-editor.fx.0.height=739
+editor.fx.0.height=0
 project.charset=UTF-8
 target12.typeParameters=
 dependency15.to=Hero
@@ -95,8 +95,8 @@ class.IntroScenario.superclass=CameraWorld
 target8.height=50
 target25.showInterface=false
 dependency26.to=Ground
-mainWindow.y=36
-mainWindow.x=50
+mainWindow.y=0
+mainWindow.x=0
 class.Hero.superclass=BattleActor
 target3.showInterface=false
 target12.showInterface=false
@@ -201,11 +201,11 @@ target4.type=ClassTarget
 target28.width=100
 target25.type=ClassTarget
 dependency33.from=Hero
-editor.fx.0.y=94
-editor.fx.0.x=1473
+editor.fx.0.y=0
+editor.fx.0.x=0
 dependency11.to=Animation
 target6.height=50
-editor.fx.0.width=816
+editor.fx.0.width=0
 class.BattleActor.superclass=MovingActor
 class.Mountain.superclass=ParralaxActor
 target24.width=90

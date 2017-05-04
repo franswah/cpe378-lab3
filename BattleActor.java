@@ -34,8 +34,15 @@ public abstract class BattleActor extends MovingActor implements Animation.Anima
     public void act() 
     {
         super.act();
+        
+
+        
         checkStatus();
         animate();
+        
+        //if(getY() == 600) {
+        //    getWorld().removeObject(this);
+        //}
     }
     
     public void damage(int dmg) {

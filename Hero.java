@@ -63,6 +63,10 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         jump();
         checkAttack();
         scroll();
+        
+        if(isAtEdge()) {
+            kill();
+        }
     }    
     
     private void move() {
@@ -112,6 +116,12 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         }
     }
     
+    public void kill() {
+        World wrld = getWorld();
+        wrld.addObject(new DialogModal("You died.\nR.I.P. Lukas"), getX(), wrld.getHeight()/2);
+        wrld.removeObject(this);
+    }
+    
     @Override
     public void damage(int dmg) {
         health = health - (dmg - defense);
@@ -120,9 +130,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         // Play damage animation?
       
         if (health <= 0) {
-            World wrld = getWorld();
-            wrld.addObject(new DialogModal("You died.\nR.I.P. Lukas"), getX(), wrld.getHeight()/2);
-            wrld.removeObject(this);
+           kill();
         }
     }
 

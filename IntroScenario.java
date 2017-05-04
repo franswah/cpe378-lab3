@@ -34,12 +34,12 @@ public class IntroScenario extends CameraWorld
         addObject(modal, 400, 400);
         
         
-        addObject(new Hero(), 400, 0);
-        addObject(new EvilWerewolf(), 1000, 0);
+        addObject(new Hero(), 400, 150);
+        addObject(new EvilWerewolf(), 800, 150);
         setBackground("images/sky-dark.png");
 
-        insertGround(0, getWidth(), 600);
-        insertGround(400, getWidth() - 400, 500);
+        insertGround(0, 1000, 600);
+        
         
         
         
@@ -56,6 +56,5 @@ public class IntroScenario extends CameraWorld
         {
             addObject(new Ground(), i, height);
         }
-    }
-    
+    } 
 }
