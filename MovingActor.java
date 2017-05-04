@@ -1,6 +1,7 @@
 import javax.net.ssl.ExtendedSSLSession;
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Write a description of class MovingActor here.
@@ -67,11 +68,19 @@ public abstract class MovingActor extends AnimatedActor
             worldPos.add(v);
 
             CameraWorld world = (CameraWorld) getWorld();
-            setLocation(worldPos.x - world.getCameraX(), worldPos.y - world.getCameraY());
+           
+                setLocation(worldPos.x - world.getCameraX(), worldPos.y - world.getCameraY());
+            
         }
         else
         {
-            setLocation(getX() + v.x, getY() + v.y);
+            if((rightIsBlocked() && !faceLeft) || (leftIsBlocked() && faceLeft)) {
+                setLocation(getX(), getY() + v.y);
+            }
+            else {
+                setLocation(getX() + v.x, getY() + v.y);
+            }
+            
         }
         
         fall();
@@ -129,6 +138,16 @@ public abstract class MovingActor extends AnimatedActor
     public boolean isGrounded() {
         Actor ground = getOneObjectAtOffset(0,5 + getImage().getHeight()/2, Ground.class);
         return ground != null;
+    }
+    
+    public boolean rightIsBlocked() {
+        Actor actor = getOneObjectAtOffset(5 + getImage().getWidth() / 2, 0, Platform.class);
+        return actor != null;
+    }
+    
+    public boolean leftIsBlocked() {
+        Actor actor = getOneObjectAtOffset(-(5 + getImage().getWidth() / 2), 0, Platform.class);
+        return actor != null;
     }
     
      @Override
