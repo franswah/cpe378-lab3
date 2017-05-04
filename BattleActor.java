@@ -9,11 +9,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class BattleActor extends MovingActor
 {
     protected int health = 100;
-    protected int strength = 1;
+    protected int strength = 4;
     protected int defense = 1;
     protected int attackDelay = 10;
     protected int attackFrame = 0;
-    protected boolean isAttacking = false;
+    protected int attackRange = 150;
     
     /**
      * Act - do whatever the BattleActor wants to do. This method is called whenever
@@ -39,9 +39,22 @@ public abstract class BattleActor extends MovingActor
         health = health + amnt;
     }
     
-    public void attack() {
-        if (attackFrame < attackDelay) {
-            attackFrame++;
-        }
+    public <T extends BattleActor> void attack(Class<T> type) {
+        for (T enemy : getObjectsInRange(attackRange, type)) {
+                if (enemy.getX() > getX() && !faceLeft) {
+                    enemy.beAttacked(this);
+                }
+                else if (enemy.getX() < getX() && faceLeft) {
+                    enemy.beAttacked(this);
+                }
+                else if (enemy.getX() == getX()) {
+                    enemy.beAttacked(this);
+                }
+            }
+    }
+
+    public void beAttacked(BattleActor actor)
+    {
+        damage(actor.strength);
     }
 }

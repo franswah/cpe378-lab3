@@ -35,7 +35,7 @@ public class IntroScenario extends CameraWorld
         
         
         addObject(new Hero(), 400, 0);
-        addObject(new Alligator(), 1000, 0);
+        addObject(new EvilWerewolf(), 1000, 0);
         setBackground("images/sky-dark.png");
 
         insertGround(0, getWidth(), 600);

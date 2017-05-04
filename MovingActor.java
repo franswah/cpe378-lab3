@@ -8,23 +8,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class MovingActor extends AnimatedActor
 {
-     public MovingActor() {
-        super();
-    }
+     
     
     protected final float G = 2.5f;
+    
+    protected Vector v;
+    protected Vector worldPos;
 
-    protected boolean isMoving = false;
+    protected boolean faceLeft = false;
     
-    private int vX = 0;
-    protected int vY = 0;
-    
-    protected int worldX;
-    protected int worldY;
-    
-    private int speed = 0;
+    protected int speed = 5;
     
     protected boolean scrolls = true;
+    
+    public MovingActor() {
+        super();
+        
+        v = new Vector(0,0);
+    }
     
     /**
      * Act - do whatever the MovingActor wants to do. This method is called whenever
@@ -36,61 +37,59 @@ public abstract class MovingActor extends AnimatedActor
 
         if (scrolls)
         {
-            worldX += vX;
-            worldY += vY;
+            worldPos.add(v);
+
             CameraWorld world = (CameraWorld) getWorld();
-            setLocation(worldX - world.getCameraX(), worldY - world.getCameraY());
+            setLocation(worldPos.x - world.getCameraX(), worldPos.y - world.getCameraY());
         }
         else
         {
-            setLocation(getX() + vX, getY() + vY);
+            setLocation(getX() + v.x, getY() + v.y);
         }
         
         fall();
        
-        if (vX != 0) {
-            isMoving = true;
+        if (v.x > 0) {
+            faceLeft = false;
         }
-        else {
-            isMoving = false;
+        else if (v.x < 0) {
+            faceLeft = true;
         }
     }
     
     
     
-    public int getVX()
+    public Vector getV()
     {
-        return vX;
-    }
-    
-    public int getVY()
-    {
-        return vY;
+        return v;
     }
 
     public void setVX(int vX)
     {
-        this.vX = vX;
+        this.v.x = vX;
     }
 
     public void setVY(int vY)
     {
-        this.vY = vY;
+        this.v.y = vY;
     }
-    
-    public abstract int getSpeed();
+
+    public void moveTo(int x, int y)
+    {
+
+    }
     
     private void fall() {
         
         if (!isGrounded())
         {   
-            vY += G;
+            v.y += G;
             
         }
         else {
             Actor ground = getOneObjectAtOffset(0,5 + getImage().getHeight()/2, Ground.class);
             setLocation(getX(),ground.getY() - (ground.getImage().getHeight() / 2 + getImage().getHeight() / 2));
-            vY = 0;
+            v.y = 0;
         }
     }
     
@@ -103,7 +102,6 @@ public abstract class MovingActor extends AnimatedActor
     protected void addedToWorld(World world)
     {
         super.addedToWorld(world);
-        worldX = getX();
-        worldY = getY();
+        worldPos = new Vector(getX(), getY());
     }
 }

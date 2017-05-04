@@ -14,13 +14,12 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     Animation attackAnimation;
     public final int speed = 7;
     private final int jump = 30;
-    private final int attackRange = 150;
 
     public static final int scrollWidth = 250;
     
     private DialogModal healthDialog;
     
-    private boolean faceLeft = false;
+    
     
 
     private int maxJump = 10;
@@ -61,7 +60,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
       
         move();
         jump();
-        attack();
+        checkAttack();
         scroll();
         animate();
     }    
@@ -69,7 +68,6 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     private void move() {
         if (Greenfoot.isKeyDown("d"))
         {
-            faceLeft = false;
             setVX(speed);
             if (currently != Status.ATTACKING && currently != Status.JUMPING) 
             {
@@ -78,7 +76,6 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         }
         else if (Greenfoot.isKeyDown("a")) 
         {
-            faceLeft = true;
             setVX(-speed);
             if (currently != Status.ATTACKING && currently != Status.JUMPING) 
             {
@@ -112,7 +109,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     private void jump() {
  
         if(Greenfoot.getKey() == "space" && super.isGrounded()) {
-            vY = -jump; }
+            v.y = -jump; }
 
     }
     
@@ -121,23 +118,10 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         return speed;
     }
     
-    @Override
-    public void attack() {
-        super.attack();
+    public void checkAttack() {
         if (Greenfoot.isKeyDown("j") && currently != Status.ATTACKING) {
             currently = Status.ATTACKING;
-
-            for (BattleActor enemy : getObjectsInRange(attackRange, BattleActor.class)) {
-                if (enemy.getX() > getX() && !faceLeft) {
-                    enemy.damage(strength);
-                }
-                else if (enemy.getX() < getX() && faceLeft) {
-                    enemy.damage(strength);
-                }
-                else if (enemy.getX() == getX()) {
-                    enemy.damage(strength);
-                }
-            }
+            attack(Enemy.class);
         }
     }
 
