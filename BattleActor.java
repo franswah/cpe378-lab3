@@ -15,7 +15,7 @@ public abstract class BattleActor extends MovingActor implements Animation.Anima
     protected int attackFrame = 0;
     protected int attackRange = 70;
 
-    protected boolean faceLeft = false;
+    
 
     protected int DEFAULT_ATTACK_DELAY = 15;
     private int attackTimeout;

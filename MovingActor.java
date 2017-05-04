@@ -22,6 +22,8 @@ public abstract class MovingActor extends AnimatedActor
     protected int accel = 1;
     
     protected boolean scrolls = true;
+    
+    protected boolean faceLeft = false;
 
     private Vector target = null;
     private int targetR;
@@ -65,7 +67,12 @@ public abstract class MovingActor extends AnimatedActor
                     v.x = 0;
                 }
             }
+
+            if((rightIsBlocked() && !faceLeft) || (leftIsBlocked() && faceLeft)) {
+                v.x = 0;
+            }
             worldPos.add(v);
+            
 
             CameraWorld world = (CameraWorld) getWorld();
            
@@ -80,7 +87,6 @@ public abstract class MovingActor extends AnimatedActor
             else {
                 setLocation(getX() + v.x, getY() + v.y);
             }
-            
         }
         
         fall();
