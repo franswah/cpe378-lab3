@@ -8,4 +8,6 @@ comment2.params=x\ y
 comment2.target=void\ set(int,\ int)
 comment3.params=v
 comment3.target=void\ add(Vector)
-numComments=4
+comment4.params=v
+comment4.target=Vector\ deff(Vector)
+numComments=5

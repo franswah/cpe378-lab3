@@ -12,6 +12,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     Animation walkingAnimation;
     Animation idleAnimation;
     Animation attackAnimation;
+    
     public final int speed = 7;
     private final int jump = 30;
 
@@ -19,27 +20,27 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     
     private DialogModal healthDialog;
     
-    
-    
 
     private int maxJump = 10;
     private int jumpCount = 0;
 
-    private enum Status {IDLE, WALKING, FALLING, ATTACKING, JUMPING, ASCENDING}
-
-    private Status currently = Status.IDLE;
 
     public Hero()
     {        
+        super();
+
         walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
         idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
         attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4);
+
+        setAnimation(Status.WALKING, walkingAnimation);
+        setAnimation(Status.IDLE, idleAnimation);
+        setAnimation(Status.ATTACKING, attackAnimation);
 
         attackAnimation.setAnimationCompleteListener(this);
         
         strength = 10;
         defense = 3;
-        attackDelay = 20;
         
         scrolls = false;
     }
@@ -62,33 +63,20 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         jump();
         checkAttack();
         scroll();
-        animate();
     }    
     
     private void move() {
         if (Greenfoot.isKeyDown("d"))
         {
             setVX(speed);
-            if (currently != Status.ATTACKING && currently != Status.JUMPING) 
-            {
-                currently = Status.WALKING;
-            }
         }
         else if (Greenfoot.isKeyDown("a")) 
         {
             setVX(-speed);
-            if (currently != Status.ATTACKING && currently != Status.JUMPING) 
-            {
-                currently = Status.WALKING;
-            }
         }
         else
         {
             setVX(0);
-            if (currently != Status.ATTACKING && currently != Status.JUMPING) 
-            {
-                currently = Status.IDLE;
-            }
         }
     }
     
@@ -120,30 +108,8 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     
     public void checkAttack() {
         if (Greenfoot.isKeyDown("j") && currently != Status.ATTACKING) {
-            currently = Status.ATTACKING;
             attack(Enemy.class);
         }
-    }
-
-    public void animate()
-    {
-        switch(currently) 
-        {
-            case IDLE:
-                setAnimation(idleAnimation);
-                break;
-            case WALKING:
-                setAnimation(walkingAnimation);
-                break;
-            case ATTACKING:
-                setAnimation(attackAnimation);
-                break;
-            default:
-                setAnimation(idleAnimation);
-                break;
-        }
-
-        getAnimation().setFlipped(faceLeft);
     }
     
     @Override
@@ -160,12 +126,5 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         }
     }
 
-    @Override
-    public void animationCompleted(Animation animation)
-    {
-        if (animation == attackAnimation) 
-        {
-            currently = Status.IDLE;
-        }
-    }
+    
 }

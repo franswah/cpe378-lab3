@@ -31,4 +31,9 @@ public class Vector
         this.y += v.y;
     }
 
+    public Vector deff(Vector v)
+    {
+        return new Vector(this.x - v.x, this.y - v.y);
+    }
+
 }

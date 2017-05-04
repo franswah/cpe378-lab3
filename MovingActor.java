@@ -1,3 +1,5 @@
+import javax.net.ssl.ExtendedSSLSession;
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -14,12 +16,14 @@ public abstract class MovingActor extends AnimatedActor
     
     protected Vector v;
     protected Vector worldPos;
-
-    protected boolean faceLeft = false;
     
-    protected int speed = 5;
+    protected int maxSpeed = 5;
+    protected int accel = 1;
     
     protected boolean scrolls = true;
+
+    private Vector target = null;
+    private int targetR;
     
     public MovingActor() {
         super();
@@ -37,6 +41,29 @@ public abstract class MovingActor extends AnimatedActor
 
         if (scrolls)
         {
+            if (target != null)
+            {
+                if (target.x - targetR > getX())
+                {
+                    v.x += accel;
+                    if (v.x > maxSpeed) v.x = maxSpeed;
+
+                    if (target.x < getX() + v.x)
+                        v.x = target.x - getX();
+                }
+                else if (target.x + targetR < getX())
+                {
+                    v.x -= accel;
+                    if (v.x < -maxSpeed) v.x = -maxSpeed;
+
+                    if (target.x > getX() - v.x)
+                        v.x = target.x - getX();
+                }
+                else 
+                {
+                    v.x = 0;
+                }
+            }
             worldPos.add(v);
 
             CameraWorld world = (CameraWorld) getWorld();
@@ -48,13 +75,6 @@ public abstract class MovingActor extends AnimatedActor
         }
         
         fall();
-       
-        if (v.x > 0) {
-            faceLeft = false;
-        }
-        else if (v.x < 0) {
-            faceLeft = true;
-        }
     }
     
     
@@ -74,9 +94,22 @@ public abstract class MovingActor extends AnimatedActor
         this.v.y = vY;
     }
 
-    public void moveTo(int x, int y)
+    public void setTarget(int x, int y)
     {
+        setTarget(x, y, 0);
+    }
 
+    public void setTarget(int x, int y, int r)
+    {
+        target = new Vector(x, y);
+        targetR = r;
+    }
+
+    public void removeTarget() 
+    {
+        target = null;
+        v.x = 0;
+        v.y = 0;
     }
     
     private void fall() {
