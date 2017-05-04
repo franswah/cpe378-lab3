@@ -147,12 +147,12 @@ public abstract class MovingActor extends AnimatedActor
     }
     
     public boolean rightIsBlocked() {
-        Actor actor = getOneObjectAtOffset(5 + getImage().getWidth() / 2, 0, Platform.class);
+        Actor actor = getOneObjectAtOffset(5 + getImage().getWidth() / 2, 0, Ground.class);
         return actor != null;
     }
     
     public boolean leftIsBlocked() {
-        Actor actor = getOneObjectAtOffset(-(5 + getImage().getWidth() / 2), 0, Platform.class);
+        Actor actor = getOneObjectAtOffset(-(5 + getImage().getWidth() / 2), 0, Ground.class);
         return actor != null;
     }
     

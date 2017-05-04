@@ -27,20 +27,95 @@ public class IntroScenario extends CameraWorld
         addObject(new DarkForest(), 400, 350);
         addObject(new DarkForestFlipped(), 1400, 350);
         addObject(new DarkForest(), 2400, 350);
- 
-        
-        DialogModal modal = new DialogModal("Hello");
-        
-        addObject(modal, 400, 400);
+
         
         
         addObject(new Hero(), 400, 150);
-        addObject(new EvilWerewolf(), 800, 150);
         setBackground("images/sky-dark.png");
 
-        insertGround(0, 1000, 600);
+        // Hill 1
+        insertGround(0, 2000, 600);
+        insertGrass(1000, 2000, 550);
+        insertGrass(1050, 2000, 500);
+        insertGrass(1150, 2000, 450);
+        insertGrass(1300, 1900, 400);
+        insertGrass(1400, 1700, 350);
+        
+        addObject(new EvilWerewolf(), 1500, 300);
+        
+        // Drop
+        insertGround(2150, 4000, 600);
+        insertGround(2150, 4000, 550);
+        insertGrass(2150, 2500, 500);
+        insertGrass(2150, 2350, 450);
+        
+        insertGround(4000, 6000, 600);
+        insertGrass(4000, 5000, 550);
+        insertGrass(4000, 5000, 500);
+        
+        addObject(new EvilWerewolf(), 4500, 300);
+        addObject(new EvilWerewolf(), 4700, 300);
+        
+        // Hook
+        insertGrass(5100, 5500, 400);
+        insertGround(5500, 5700, 400);
+        insertGround(5500, 5900, 450);
+        insertGround(5500, 6000, 500);
+        insertGround(5000, 6000, 550);
         
         
+        addObject(new EvilWerewolf(), 5600, 300);
+        
+        
+        // Clif
+        insertGround(6100, 8000, 600);
+        insertGround(6100, 6300, 550);
+        insertGround(6700, 8000, 550);
+        insertGrass(7000, 8000, 500);
+        insertGrass(7250, 8000, 450);
+        insertGrass(7350, 8000, 400);
+        insertGrass(7500, 8000, 350);
+        insertGrass(7600, 8000, 300);
+        insertGrass(8000, 8050, 500);
+        
+        addObject(new EvilWerewolf(), 7000, 400);
+        addObject(new EvilWerewolf(), 7200, 400);
+        
+        
+        insertGround(8150, 8300, 550);
+        insertGrass(8150, 8300, 500);
+        insertGrass(8150, 8300, 450);
+        insertGrass(8150, 8300, 400);
+        insertGrass(8150, 8300, 350);
+        insertGrass(8150, 8300, 300);
+        
+        
+        addObject(new EvilWerewolf(), 8500, 300);
+        
+        insertGround(8450, 8550, 600);      
+        insertGround(8450, 8550, 550);
+        insertGrass(8450, 8550, 500);
+        insertGrass(8450, 8550, 450);
+        insertGrass(8450, 8550, 400);
+        insertGrass(8450, 8550, 350);
+        
+        insertGround(8700, 8750, 600); 
+        insertGround(8700, 8750, 550);
+        insertGrass(8700, 8750, 500);
+        insertGrass(8700, 8750, 450);
+        insertGrass(8700, 8850, 400);
+ 
+    
+       
+        insertGround(9000, 10000, 600);
+        insertGround(10000, 11000, 500);
+        insertGrass(10500, 11000, 450);
+        
+        insertGround(10750, 12000, 600);
+        
+        
+        
+        //super.setCameraX(9000);
         
         
         // Plays music the entire time this scene is running. Uncomment if you want to hear the same minute looped over and over.
@@ -56,5 +131,23 @@ public class IntroScenario extends CameraWorld
         {
             addObject(new Ground(), i, height);
         }
-    } 
+    }
+    
+    private void insertGrass(int start, int end, int height) {
+    GreenfootImage block = new Grass().getImage();
+
+        for (int i = start; i < end; i+= block.getWidth())
+        {
+            addObject(new Grass(), i, height);
+        }
+    }
+    
+    private void insertDirt(int start, int end, int height) {
+    GreenfootImage block = new Dirt().getImage();
+
+        for (int i = start; i < end; i+= block.getWidth())
+        {
+            addObject(new Dirt(), i, height);
+        }
+    }
 }
