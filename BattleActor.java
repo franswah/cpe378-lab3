@@ -10,7 +10,7 @@ import java.util.*;
 public abstract class BattleActor extends MovingActor implements Animation.AnimationCompleteListener
 {
     protected int health = 100;
-    protected int strength = 4;
+    protected int strength = 10;
     protected int defense = 1;
     protected int attackFrame = 0;
     protected int attackRange = 70;

@@ -13,6 +13,8 @@ public class EvilWerewolf extends Enemy
     Animation walkingAnimation;
     Animation idleAnimation;
     Animation attackAnimation;
+    
+    private GreenfootSound[] damageSounds = new GreenfootSound[2];
 
     private int knockedBack = 15;
     
@@ -22,13 +24,18 @@ public class EvilWerewolf extends Enemy
         idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
         attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4);
 
-        walkingAnimation.tint(50, 0, 0);
-        idleAnimation.tint(50, 0, 0);
-        attackAnimation.tint(50, 0, 0);
+        walkingAnimation.tint(-55, -120, -170);
+        idleAnimation.tint(-55, -120, -170);
+        attackAnimation.tint(-55, -120, -170);
         
         setAnimation(Status.WALKING, walkingAnimation);
         setAnimation(Status.IDLE, idleAnimation);
         setAnimation(Status.ATTACKING, attackAnimation);
+        
+        damageSounds[0] = new GreenfootSound("growl1.wav");
+        damageSounds[1] = new GreenfootSound("growl2.wav");
+        damageSounds[0].setVolume(72);
+        damageSounds[1].setVolume(72);
     }
     /**
      * Act - do whatever the EvilWerewolf wants to do. This method is called whenever
@@ -61,6 +68,8 @@ public class EvilWerewolf extends Enemy
             setVX(knockedBack);
 
         setVY(-knockedBack);
+        
+        damageSounds[Greenfoot.getRandomNumber(2)].play();
 
         super.beAttacked(actor);
     }   

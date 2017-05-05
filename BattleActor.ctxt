@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=BattleActor
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ BattleActor\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ BattleActor\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment2.params=dmg
+comment2.target=void\ damage(int)
+comment3.params=amnt
+comment3.target=void\ heal(int)
+comment4.params=type
+comment4.target=void\ attack(java.lang.Class)
+comment5.params=actor
+comment5.target=void\ beAttacked(BattleActor)
+comment6.params=status\ anim
+comment6.target=void\ setAnimation(BattleActor.Status,\ Animation)
+comment7.params=
+comment7.target=void\ checkStatus()
+comment8.params=
+comment8.target=void\ animate()
+comment9.params=animation
+comment9.target=void\ animationCompleted(Animation)
+numComments=10

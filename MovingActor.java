@@ -13,13 +13,14 @@ public abstract class MovingActor extends AnimatedActor
 {
      
     
-    protected final float G = 2.5f;
+    protected final float G = 1.5f;
     
     protected Vector v;
     protected Vector worldPos;
     
     protected int maxSpeed = 5;
     protected int accel = 1;
+    protected int jumpV = 25;
     
     protected boolean scrolls = true;
     
@@ -69,6 +70,9 @@ public abstract class MovingActor extends AnimatedActor
             }
 
             if((rightIsBlocked() && !faceLeft) || (leftIsBlocked() && faceLeft)) {
+                if (target != null) {
+                    jump();
+                }
                 v.x = 0;
             }
             worldPos.add(v);
@@ -127,6 +131,11 @@ public abstract class MovingActor extends AnimatedActor
         v.y = 0;
     }
     
+    public void jump()
+    {
+        v.y = -jumpV;
+    }
+    
     private void fall() {
         
         if (!isGrounded())
@@ -142,18 +151,20 @@ public abstract class MovingActor extends AnimatedActor
     }
     
     public boolean isGrounded() {
-        Actor ground = getOneObjectAtOffset(0,5 + getImage().getHeight()/2, Ground.class);
+        Actor ground = getOneObjectAtOffset(0,2 + getImage().getHeight()/2, Ground.class);
         return ground != null;
     }
     
     public boolean rightIsBlocked() {
-        Actor actor = getOneObjectAtOffset(5 + getImage().getWidth() / 2, 0, Platform.class);
-        return actor != null;
+        Actor topActor = getOneObjectAtOffset(5 + getImage().getWidth() / 2, -(getImage().getHeight() / 2 - 5), Ground.class);
+        Actor botActor = getOneObjectAtOffset(5 + getImage().getWidth() / 2, getImage().getHeight() / 2 - 5, Ground.class);
+        return topActor != null || botActor != null;
     }
     
     public boolean leftIsBlocked() {
-        Actor actor = getOneObjectAtOffset(-(5 + getImage().getWidth() / 2), 0, Platform.class);
-        return actor != null;
+        Actor topActor = getOneObjectAtOffset(-(5 + getImage().getWidth() / 2), -(getImage().getHeight() / 2 - 5), Ground.class);
+        Actor botActor = getOneObjectAtOffset(-(5 + getImage().getWidth() / 2), getImage().getHeight() / 2 - 5, Ground.class);
+        return topActor != null || botActor != null;
     }
     
      @Override
