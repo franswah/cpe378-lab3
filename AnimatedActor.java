@@ -38,5 +38,8 @@ public abstract class AnimatedActor extends Actor
         return animation;
     }
     
-    
+    public boolean inRangeOf(AnimatedActor actor, int r) 
+    {
+        return Math.abs(actor.getX() - getX()) <= r;
+    }
 }

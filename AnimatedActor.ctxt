@@ -10,4 +10,6 @@ comment3.params=anim
 comment3.target=void\ setAnimation(Animation)
 comment4.params=
 comment4.target=Animation\ getAnimation()
-numComments=5
+comment5.params=actor\ r
+comment5.target=boolean\ inRangeOf(AnimatedActor,\ int)
+numComments=6

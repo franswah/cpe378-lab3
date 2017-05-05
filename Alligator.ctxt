@@ -12,6 +12,4 @@ comment4.params=
 comment4.target=greenfoot.GreenfootImage\ getCurrentAnimationFrame()
 comment5.params=
 comment5.target=void\ move()
-comment6.params=
-comment6.target=void\ attack()
-numComments=7
+numComments=6

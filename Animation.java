@@ -115,6 +115,11 @@ public class Animation
     {
         return currentFrame;
     }
+
+    public int getLength()
+    {
+        return delay * numFrames;
+    }
     
     public static GreenfootImage getMirroredImage(GreenfootImage original)
     {
@@ -126,6 +131,41 @@ public class Animation
             mirrored.setColorAt(n, y, color);
         }
         return mirrored;
+    }
+
+    public void tint(int r, int g, int b)
+    {
+        tint(frames, r, g, b);
+        tint(flippedFrames, r, g, b);
+    }
+
+    private static void tint(List<GreenfootImage> images, int r, int g, int b)
+    {
+        for (GreenfootImage img : images)
+        {
+            for (int x = 0; x < img.getWidth(); x++)
+            {
+                for (int y = 0; y < img.getHeight(); y++)
+                {
+                    Color orig = img.getColorAt(x, y);
+                    int a = orig.getAlpha();
+
+                    img.setColorAt(x, y, 
+                        new Color(addColors(orig.getRed(), r), 
+                        addColors(orig.getGreen(), g), 
+                        addColors(orig.getBlue(), b),
+                        a));
+                }
+            }
+        }
+    }
+    
+    private static int addColors(int c, int a)
+    {
+        int sum = c + a;
+        if (sum > 255) return 255;
+        if (sum < 0) return 0;
+        return sum;
     }
 
     public interface AnimationCompleteListener

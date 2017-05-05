@@ -12,36 +12,36 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     Animation walkingAnimation;
     Animation idleAnimation;
     Animation attackAnimation;
+    
     public final int speed = 7;
     private final int jump = 30;
-    private final int attackRange = 150;
 
     public static final int scrollWidth = 250;
     
     private DialogModal healthDialog;
-    
-    private boolean faceLeft = false;
     
     private GreenfootSound[] damageSounds = new GreenfootSound[2];
 
     private int maxJump = 10;
     private int jumpCount = 0;
 
-    private enum Status {IDLE, WALKING, FALLING, ATTACKING, JUMPING, ASCENDING}
-
-    private Status currently = Status.IDLE;
 
     public Hero()
     {        
+        super();
+
         walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
         idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
         attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4);
+
+        setAnimation(Status.WALKING, walkingAnimation);
+        setAnimation(Status.IDLE, idleAnimation);
+        setAnimation(Status.ATTACKING, attackAnimation);
 
         attackAnimation.setAnimationCompleteListener(this);
         
         strength = 10;
         defense = 3;
-        attackDelay = 20;
         
         damageSounds[0] = new GreenfootSound("growl1.wav");
         damageSounds[1] = new GreenfootSound("growl2.wav");
@@ -66,37 +66,26 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
       
         move();
         jump();
-        attack();
+        checkAttack();
         scroll();
-        animate();
+        
+        if(isAtEdge()) {
+            kill();
+        }
     }    
     
     private void move() {
         if (Greenfoot.isKeyDown("d"))
         {
-            faceLeft = false;
             setVX(speed);
-            if (currently != Status.ATTACKING && currently != Status.JUMPING) 
-            {
-                currently = Status.WALKING;
-            }
         }
         else if (Greenfoot.isKeyDown("a")) 
         {
-            faceLeft = true;
             setVX(-speed);
-            if (currently != Status.ATTACKING && currently != Status.JUMPING) 
-            {
-                currently = Status.WALKING;
-            }
         }
         else
         {
             setVX(0);
-            if (currently != Status.ATTACKING && currently != Status.JUMPING) 
-            {
-                currently = Status.IDLE;
-            }
         }
     }
     
@@ -117,7 +106,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     private void jump() {
  
         if(Greenfoot.getKey() == "space" && super.isGrounded()) {
-            vY = -jump; }
+            v.y = -jump; }
 
     }
     
@@ -126,45 +115,16 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         return speed;
     }
     
-    @Override
-    public void attack() {
-        super.attack();
+    public void checkAttack() {
         if (Greenfoot.isKeyDown("j") && currently != Status.ATTACKING) {
-            currently = Status.ATTACKING;
-
-            for (BattleActor enemy : getObjectsInRange(attackRange, BattleActor.class)) {
-                if (enemy.getX() > getX() && !faceLeft) {
-                    enemy.damage(strength);
-                }
-                else if (enemy.getX() < getX() && faceLeft) {
-                    enemy.damage(strength);
-                }
-                else if (enemy.getX() == getX()) {
-                    enemy.damage(strength);
-                }
-            }
+            attack(Enemy.class);
         }
     }
-
-    public void animate()
-    {
-        switch(currently) 
-        {
-            case IDLE:
-                setAnimation(idleAnimation);
-                break;
-            case WALKING:
-                setAnimation(walkingAnimation);
-                break;
-            case ATTACKING:
-                setAnimation(attackAnimation);
-                break;
-            default:
-                setAnimation(idleAnimation);
-                break;
-        }
-
-        getAnimation().setFlipped(faceLeft);
+    
+    public void kill() {
+        World wrld = getWorld();
+        wrld.addObject(new DialogModal("You died.\nR.I.P. Lukas"), getX(), wrld.getHeight()/2);
+        wrld.removeObject(this);
     }
     
     @Override
@@ -176,18 +136,9 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         damageSounds[Greenfoot.getRandomNumber(2)].play();
       
         if (health <= 0) {
-            World wrld = getWorld();
-            wrld.addObject(new DialogModal("You died.\nR.I.P. Lukas"), getX(), wrld.getHeight()/2);
-            wrld.removeObject(this);
+           kill();
         }
     }
 
-    @Override
-    public void animationCompleted(Animation animation)
-    {
-        if (animation == attackAnimation) 
-        {
-            currently = Status.IDLE;
-        }
-    }
+    
 }

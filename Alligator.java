@@ -24,7 +24,7 @@ public class Alligator extends Enemy
     {
         super.act();
         move();
-        attack();
+        attack(Hero.class);
     }    
     public int getSpeed() {
         return 2;
@@ -45,13 +45,4 @@ public class Alligator extends Enemy
         }
     }
     
-    public void attack() {
-        super.attack();
-        Hero hero = (Hero)getOneIntersectingObject(Hero.class);
-        
-        if (hero != null && attackFrame == attackDelay) {
-            hero.damage(strength);
-            attackFrame = 0;
-        }
-    }
 }
