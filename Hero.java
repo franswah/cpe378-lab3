@@ -14,6 +14,8 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     Animation attackAnimation;
     
     public final int speed = 7;
+    
+    private int knockedBack = 10;
 
     public static final int scrollWidth = 250;
     
@@ -28,6 +30,8 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
         idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
         attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4);
+
+        attackAnimation.offsetX = 25;
 
         setAnimation(Status.WALKING, walkingAnimation);
         setAnimation(Status.IDLE, idleAnimation);
@@ -72,17 +76,24 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     private void move() {
         if (Greenfoot.isKeyDown("d"))
         {
+            faceLeft = false;
             setVX(speed);
         }
         else if (Greenfoot.isKeyDown("a")) 
         {
+            faceLeft = true;
             setVX(-speed);
         }
         else
         {
             setVX(0);
         }
-    }
+        
+        if (currently == Status.ATTACKING && isGrounded())
+        {
+            setVX(0);
+        }
+   }
     
     private void scroll() {
         CameraWorld world = (CameraWorld)getWorld();
@@ -133,6 +144,15 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         if (health <= 0) {
            kill();
         }
+    }
+    
+    @Override
+    public void beAttacked(BattleActor actor)
+    {
+        setVY(-knockedBack);
+        
+        super.beAttacked(actor);
+        
     }
 
     

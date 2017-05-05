@@ -19,6 +19,7 @@ public class Animation
 
     private int currentFrame = 0;
     private int counter = delay;
+    public int offsetX = 0;
 
     private AnimationCompleteListener  completeListener = null;
 

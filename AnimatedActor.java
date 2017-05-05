@@ -11,6 +11,11 @@ public abstract class AnimatedActor extends Actor
 {
     Animation animation;  
 
+    protected boolean faceLeft = false;
+
+    private int offsetX = 0;
+
+
     public AnimatedActor() {
         super();
     }
@@ -26,11 +31,33 @@ public abstract class AnimatedActor extends Actor
         {
             setImage(animation.getNextFrame());
         }
+
+        
     }
     
     public void setAnimation(Animation anim)
     {
+        if (animation != null)
+        {
+            if (faceLeft)
+            {
+                setLocation(getX() + this.animation.offsetX, getY());
+            }
+            else
+            {
+                setLocation(getX() - this.animation.offsetX, getY());
+            }
+        }
+        
         this.animation = anim;
+        if (faceLeft)
+        {
+            setLocation(getX() - this.animation.offsetX, getY());
+        }
+        else
+        {
+            setLocation(getX() + this.animation.offsetX, getY());
+        }
     }
     
     public Animation getAnimation()

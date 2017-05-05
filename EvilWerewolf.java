@@ -23,7 +23,9 @@ public class EvilWerewolf extends Enemy
         walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
         idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
         attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4);
-
+        
+        attackAnimation.offsetX = 30;
+        
         walkingAnimation.tint(-55, -120, -170);
         idleAnimation.tint(-55, -120, -170);
         attackAnimation.tint(-55, -120, -170);

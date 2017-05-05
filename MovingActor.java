@@ -15,7 +15,7 @@ public abstract class MovingActor extends AnimatedActor
     
     protected final float G = 1.5f;
     
-    protected Vector v;
+    private Vector v;
     protected Vector worldPos;
     
     protected int maxSpeed = 5;
@@ -24,7 +24,6 @@ public abstract class MovingActor extends AnimatedActor
     
     protected boolean scrolls = true;
     
-    protected boolean faceLeft = false;
 
     private Vector target = null;
     private int targetR;
@@ -49,6 +48,7 @@ public abstract class MovingActor extends AnimatedActor
             {
                 if (target.x - targetR > getX())
                 {
+                    faceLeft = false;
                     v.x += accel;
                     if (v.x > maxSpeed) v.x = maxSpeed;
 
@@ -57,6 +57,7 @@ public abstract class MovingActor extends AnimatedActor
                 }
                 else if (target.x + targetR < getX())
                 {
+                    faceLeft = true;
                     v.x -= accel;
                     if (v.x < -maxSpeed) v.x = -maxSpeed;
 
@@ -80,7 +81,7 @@ public abstract class MovingActor extends AnimatedActor
 
             CameraWorld world = (CameraWorld) getWorld();
            
-                setLocation(worldPos.x - world.getCameraX(), worldPos.y - world.getCameraY());
+            setLocation(worldPos.x - world.getCameraX(), worldPos.y - world.getCameraY());
             
         }
         else
@@ -98,9 +99,14 @@ public abstract class MovingActor extends AnimatedActor
     
     
     
-    public Vector getV()
+    public int getVX()
     {
-        return v;
+        return v.x;
+    }
+    
+    public int getVY()
+    {
+        return v.y;
     }
 
     public void setVX(int vX)
@@ -128,7 +134,6 @@ public abstract class MovingActor extends AnimatedActor
     {
         target = null;
         v.x = 0;
-        v.y = 0;
     }
     
     public void jump()

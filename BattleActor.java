@@ -33,16 +33,13 @@ public abstract class BattleActor extends MovingActor implements Animation.Anima
      */
     public void act() 
     {
-        super.act();
-        
-
-        
         checkStatus();
         animate();
         
         //if(getY() == 600) {
         //    getWorld().removeObject(this);
         //}
+        super.act();
     }
     
     public void damage(int dmg) {
@@ -103,13 +100,11 @@ public abstract class BattleActor extends MovingActor implements Animation.Anima
                 currently = Status.IDLE;
             }
         }
-        else if (v.x > 0) {
+        else if (getVX() > 0) {
             currently = Status.WALKING;
-            faceLeft = false;
         }
-        else if (v.x < 0) {
+        else if (getVX() < 0) {
             currently = Status.WALKING;
-            faceLeft = true;
         }
         else {
             currently = Status.IDLE;
