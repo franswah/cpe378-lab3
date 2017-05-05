@@ -14,17 +14,12 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     Animation attackAnimation;
     
     public final int speed = 7;
-    private final int jump = 30;
 
     public static final int scrollWidth = 250;
     
     private DialogModal healthDialog;
     
     private GreenfootSound[] damageSounds = new GreenfootSound[2];
-
-    private int maxJump = 10;
-    private int jumpCount = 0;
-
 
     public Hero()
     {        
@@ -40,8 +35,8 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
 
         attackAnimation.setAnimationCompleteListener(this);
         
-        strength = 10;
-        defense = 3;
+        strength = 15;
+        defense = 6;
         
         damageSounds[0] = new GreenfootSound("growl1.wav");
         damageSounds[1] = new GreenfootSound("growl2.wav");
@@ -65,7 +60,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         super.act();
       
         move();
-        jump();
+        checkJump();
         checkAttack();
         scroll();
         
@@ -103,10 +98,10 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         }
     }
   
-    private void jump() {
+    private void checkJump() {
  
         if(Greenfoot.getKey() == "space" && super.isGrounded()) {
-            v.y = -jump; }
+           jump(); }
 
     }
     

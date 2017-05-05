@@ -43,7 +43,7 @@ public class IntroScenario extends CameraWorld
         insertGrass(1300, 1900, 400);
         insertGrass(1400, 1700, 350);
         
-        addObject(new EvilWerewolf(), 1500, 300);
+        addObject(new EvilWerewolf(), 1500, 200);
         
         // Drop
         insertGround(2150, 4000, 600);
