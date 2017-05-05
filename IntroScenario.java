@@ -33,7 +33,7 @@ public class IntroScenario extends CameraWorld
         
         setBackground("images/sky-dark.png");
         
-        addObject(new Witch(), 800 ,495);
+        addObject(new Witch(), 11500 ,495);
 
         // Hill 1
         insertGround(0, 2000, 600);
@@ -115,14 +115,27 @@ public class IntroScenario extends CameraWorld
         
         insertGround(10750, 12000, 600);
         
-        
-        addObject(new Hero(), 400, 150);
+        EvilWerewolf evilWolf = new EvilWerewolf();
+        evilWolf.setImage(Animation.getMirroredImage(evilWolf.idleAnimation.getCurrentFrame()));
+        addObject(evilWolf, 600, 500);
+        addObject(new Hero(), 300, 500);
         //super.setCameraX(9000);
         
         
         // Plays music the entire time this scene is running. Uncomment if you want to hear the same minute looped over and over.
-        //GreenfootSound loop = new GreenfootSound("noGuitar.wav");
-       //loop.playLoop();
+        GreenfootSound loop = new GreenfootSound("battle.wav");
+        loop.playLoop();
+        
+        BlockingDialog splash = new BlockingDialog("Wolfman\n(Beta)\n\nUse the W, A, S, D, keys to move\nUse SPACE to jump\nUse T to talk"
+           + "\nUse J to attack\n\nClick, SPACE, J, and T will advance the dialogue\n\nUse ENTER to restart", 500,300);
+        splash.display(this);
+        
+        BlockingDialog.addNext("Huh...\nWhere am I?\nWHAT AM I?",300,350);
+        BlockingDialog.addNext("Don't you remember?\nYou're a werewolf now.",600,350);
+        BlockingDialog.addNext("You need to tell me how\nI can change back!",300,350);
+        BlockingDialog.addNext("Why would you want to? You're much stronger now.\nPlus, when we take over the kingdom you'll\nprobably want to be on the winning side.",600,350);
+        BlockingDialog.addNext("I don't have time for this!\nI need to find a way to change back!",300,350);
+        BlockingDialog.addNext("Fine, have it your way, but there's\nno way I can let you escape.",600,350);
     }
 
     private void insertGround(int start, int end, int height)

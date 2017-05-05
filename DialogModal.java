@@ -17,7 +17,7 @@ public class DialogModal extends Actor
     private GreenfootImage container;
     private int framesBeforeClose = 0;
     private int closeMax = 10;
-    private boolean isClosing = false;
+    protected boolean isClosing = false;
     
     DialogModal(String text) {
         image = new GreenfootImage(text, defaultFontSize, Color.WHITE, Color.BLACK);
@@ -39,11 +39,7 @@ public class DialogModal extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
-    {
-        if(Greenfoot.mouseClicked(this)) {
-            isClosing = true;
-        }
-        
+    {   
         if(framesBeforeClose == closeMax) {
                 dismiss();
         } else if (isClosing) {
@@ -53,6 +49,10 @@ public class DialogModal extends Actor
                 container.scale(container.getWidth() - 10, container.getHeight() - 10);  
             }
         }
+    }
+    
+    public void close() {
+        isClosing = true;
     }
     
     public void setText(String txt) {

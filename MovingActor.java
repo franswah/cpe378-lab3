@@ -150,8 +150,10 @@ public abstract class MovingActor extends AnimatedActor
         }
         else {
             Actor ground = getOneObjectAtOffset(0,5 + getImage().getHeight()/2, Ground.class);
-            setLocation(getX(),ground.getY() - (ground.getImage().getHeight() / 2 + getImage().getHeight() / 2));
-            v.y = 0;
+            if (ground != null) {
+                setLocation(getX(),ground.getY() - (ground.getImage().getHeight() / 2 + getImage().getHeight() / 2));
+                v.y = 0;
+            }
         }
     }
     

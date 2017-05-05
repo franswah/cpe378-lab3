@@ -42,11 +42,12 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         strength = 15;
         defense = 6;
         
-        damageSounds[0] = new GreenfootSound("growl1.wav");
-        damageSounds[1] = new GreenfootSound("growl2.wav");
+        damageSounds[0] = new GreenfootSound("growl3.wav");
+        damageSounds[1] = new GreenfootSound("growl5.wav");
         damageSounds[0].setVolume(80);
         damageSounds[1].setVolume(80);
         scrolls = false;
+        setImage(idleAnimation.getCurrentFrame());
     }
     
     @Override public void addedToWorld(World world) {
@@ -61,6 +62,10 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
      */
     public void act() 
     {
+        if (BlockingDialog.paused) {
+            return;
+        }
+        
         super.act();
       
         move();
@@ -111,7 +116,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
   
     private void checkJump() {
  
-        if(Greenfoot.getKey() == "space" && super.isGrounded()) {
+        if(Greenfoot.isKeyDown("space") && super.isGrounded()) {
            jump(); }
 
     }
@@ -129,7 +134,8 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     
     public void kill() {
         World wrld = getWorld();
-        wrld.addObject(new DialogModal("You died.\nR.I.P. Lukas"), getX(), wrld.getHeight()/2);
+        BlockingDialog killDialog = new BlockingDialog("You died\nR.I.P. Lukas\n\nPress ENTER to restart", getX(), wrld.getHeight()/2);
+        killDialog.display(wrld);
         wrld.removeObject(this);
     }
     

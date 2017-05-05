@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=BlockingDialog
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ BlockingDialog\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=text\ x\ y
+comment1.target=BlockingDialog(java.lang.String,\ int,\ int)
+comment2.params=world
+comment2.target=void\ display(greenfoot.World)
+comment3.params=nextDialog
+comment3.target=void\ addNext(BlockingDialog)
+comment4.params=text\ x\ y
+comment4.target=void\ addNext(java.lang.String,\ int,\ int)
+comment5.params=
+comment5.target=void\ act()
+comment5.text=\r\n\ Act\ -\ do\ whatever\ the\ BlockingDialog\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment6.params=
+comment6.target=void\ dismiss()
+numComments=7

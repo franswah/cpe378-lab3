@@ -14,7 +14,7 @@ public class EvilWerewolf extends Enemy
     Animation idleAnimation;
     Animation attackAnimation;
     
-    private GreenfootSound[] damageSounds = new GreenfootSound[2];
+    private static GreenfootSound[] damageSounds = new GreenfootSound[3];
 
     private int knockedBack = 15;
     
@@ -23,9 +23,9 @@ public class EvilWerewolf extends Enemy
         walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
         idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
         attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4);
-        
+    
         attackAnimation.offsetX = 30;
-        
+    
         walkingAnimation.tint(-55, -120, -170);
         idleAnimation.tint(-55, -120, -170);
         attackAnimation.tint(-55, -120, -170);
@@ -34,10 +34,14 @@ public class EvilWerewolf extends Enemy
         setAnimation(Status.IDLE, idleAnimation);
         setAnimation(Status.ATTACKING, attackAnimation);
         
-        damageSounds[0] = new GreenfootSound("growl1.wav");
-        damageSounds[1] = new GreenfootSound("growl2.wav");
-        damageSounds[0].setVolume(72);
-        damageSounds[1].setVolume(72);
+        if (damageSounds[0] == null) {
+           damageSounds[0] = new GreenfootSound("growl1.wav");
+           damageSounds[1] = new GreenfootSound("growl2.wav");
+           damageSounds[2] = new GreenfootSound("growl4.wav");
+           damageSounds[0].setVolume(80);
+           damageSounds[1].setVolume(80);
+           damageSounds[2].setVolume(80);
+        }
     }
     /**
      * Act - do whatever the EvilWerewolf wants to do. This method is called whenever
@@ -46,6 +50,10 @@ public class EvilWerewolf extends Enemy
     @Override
     public void act() 
     {
+        if (BlockingDialog.paused) {
+            return;
+        }
+        
         super.act();
         
         for (Hero hero : getObjectsInRange(500, Hero.class)) {
@@ -79,7 +87,7 @@ public class EvilWerewolf extends Enemy
 
         setVY(-knockedBack);
         
-        damageSounds[Greenfoot.getRandomNumber(2)].play();
+        damageSounds[Greenfoot.getRandomNumber(3)].play();
 
         super.beAttacked(actor);
     }   
