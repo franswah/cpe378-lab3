@@ -22,6 +22,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     
     private boolean faceLeft = false;
     
+    private GreenfootSound[] damageSounds = new GreenfootSound[2];
 
     private int maxJump = 10;
     private int jumpCount = 0;
@@ -42,6 +43,10 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         defense = 3;
         attackDelay = 20;
         
+        damageSounds[0] = new GreenfootSound("growl1.wav");
+        damageSounds[1] = new GreenfootSound("growl2.wav");
+        damageSounds[0].setVolume(80);
+        damageSounds[1].setVolume(80);
         scrolls = false;
     }
     
@@ -168,6 +173,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         healthDialog.setText("Health: " + Math.max(health, 0));
         
         // Play damage animation?
+        damageSounds[Greenfoot.getRandomNumber(2)].play();
       
         if (health <= 0) {
             World wrld = getWorld();
