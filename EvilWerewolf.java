@@ -52,6 +52,14 @@ public class EvilWerewolf extends Enemy
             if (inRangeOf(hero, 60)) 
             {
                 removeTarget();
+                if (getX() < hero.getX()) 
+                {
+                    faceLeft = false;
+                }
+                else
+                {
+                    faceLeft = true;
+                }
                 attack(Hero.class);
             }
             else 

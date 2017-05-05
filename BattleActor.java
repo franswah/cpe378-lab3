@@ -13,7 +13,7 @@ public abstract class BattleActor extends MovingActor implements Animation.Anima
     protected int strength = 10;
     protected int defense = 1;
     protected int attackFrame = 0;
-    protected int attackRange = 70;
+    protected int attackRange = 75;
 
     
 
