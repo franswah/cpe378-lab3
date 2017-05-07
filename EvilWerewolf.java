@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import javafx.scene.shape.Ellipse;
+import java.util.*;
 
 
 /**
@@ -58,11 +59,13 @@ public class EvilWerewolf extends Enemy
         
         super.act();
         
+        chaseVillagers();
+        /*
         for (Hero hero : getObjectsInRange(500, Hero.class)) {
             if (inRangeOf(hero, 60)) 
             {
                 removeTarget();
-                if (getX() < hero.getX()) 
+                if (worldPos.x < hero.worldPos.x) 
                 {
                     faceLeft = false;
                 }
@@ -74,10 +77,43 @@ public class EvilWerewolf extends Enemy
             }
             else 
             {
-                setTarget(hero.getX(), hero.getY(), 60);
+                setTarget(hero.worldPos.x, hero.getY(), 60);
             }
         }
+        */
     }
+    
+    public void chaseVillagers()
+    {
+        List<Villager> villagers = getObjectsInRange(500, Villager.class);
+        Villager villager = (Villager)getNearest(villagers);
+        if (villager != null)
+        {
+            if (inRangeOf(villager, 60)) 
+            {
+                removeTarget();
+                if (worldPos.x < villager.worldPos.x) 
+                {
+                    faceLeft = false;
+                }
+                else
+                {
+                    faceLeft = true;
+                }
+                attack(Villager.class);
+            }
+            else 
+            {
+                setTarget(villager.worldPos.x, 0, 60);
+            }
+        }
+        else
+        {
+            removeTarget();
+        }
+    }
+    
+    
 
     @Override
     public void beAttacked(BattleActor actor)

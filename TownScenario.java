@@ -35,6 +35,18 @@ public class TownScenario extends CameraWorld
         setBackground("images/sky.jpg");
         
         addObject(new Hero(), 300, 500);
+        
+        addObject(new Villager(), 600, 500);
+        addObject(new Villager(false), 900, 500);
+        addObject(new Villager(), 1600, 500);
+        addObject(new Villager(false), 1900, 500);
+        addObject(new Villager(), 1700, 500);
+        addObject(new Villager(), 1100, 500);
+        
+        addObject(new EvilWerewolf(), 300, 500);
+        addObject(new EvilWerewolf(), 800, 500);
+        addObject(new EvilWerewolf(), 1000, 500);
+        addObject(new EvilWerewolf(), 1800, 500);
     }
     
     private void insertGround(int start, int end, int height)

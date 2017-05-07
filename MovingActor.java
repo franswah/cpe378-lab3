@@ -46,23 +46,23 @@ public abstract class MovingActor extends AnimatedActor
         {
             if (target != null)
             {
-                if (target.x - targetR > getX())
+                if (target.x - targetR > worldPos.x)
                 {
                     faceLeft = false;
                     v.x += accel;
                     if (v.x > maxSpeed) v.x = maxSpeed;
 
-                    if (target.x < getX() + v.x)
-                        v.x = target.x - getX();
+                    if (target.x < worldPos.x + v.x)
+                        v.x = target.x - worldPos.x;
                 }
-                else if (target.x + targetR < getX())
+                else if (target.x + targetR < worldPos.x)
                 {
                     faceLeft = true;
                     v.x -= accel;
                     if (v.x < -maxSpeed) v.x = -maxSpeed;
 
-                    if (target.x > getX() - v.x)
-                        v.x = target.x - getX();
+                    if (target.x > worldPos.x - v.x)
+                        v.x = target.x - worldPos.x;
                 }
                 else 
                 {

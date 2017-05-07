@@ -12,4 +12,6 @@ comment4.params=
 comment4.target=Animation\ getAnimation()
 comment5.params=actor\ r
 comment5.target=boolean\ inRangeOf(AnimatedActor,\ int)
-numComments=6
+comment6.params=actors
+comment6.target=greenfoot.Actor\ getNearest(java.util.List)
+numComments=7

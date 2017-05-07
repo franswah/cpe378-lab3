@@ -69,4 +69,25 @@ public abstract class AnimatedActor extends Actor
     {
         return Math.abs(actor.getX() - getX()) <= r;
     }
+    
+    public Actor getNearest(List<? extends Actor> actors) 
+    {
+        if (actors.size() == 0) return null;
+        
+        Actor nearest = actors.get(0);
+        int nearestDist = Math.abs(getX() - nearest.getX());
+        
+        for (Actor actor : actors)
+        {
+            int dist = Math.abs(getX() - actor.getX());
+            if (dist < nearestDist)
+            {
+                nearest = actor;
+                nearestDist = dist;
+            }
+        }
+        
+        return nearest;
+    }
+    
 }
