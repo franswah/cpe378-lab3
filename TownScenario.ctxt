@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=TownScenario
+comment0.text=\n\ Write\ a\ description\ of\ class\ TownScenario\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=TownScenario()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ TownScenario.\n\ \n
+comment2.params=
+comment2.target=void\ prepare()
+comment3.params=start\ end\ height
+comment3.target=void\ insertGround(int,\ int,\ int)
+numComments=4
