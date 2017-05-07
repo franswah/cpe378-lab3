@@ -40,15 +40,28 @@ public class Animation
             frames.add(new GreenfootImage(fileName));
         }
         
-        for(GreenfootImage frame : frames) {
-            int height = frame.getHeight();
-            
-            int width = frame.getWidth();
-            int ratio = width / 100;
-             
-             frame.scale(100,  Integer.valueOf((frame.getHeight() / ratio)));
-   
+        flippedFrames = new ArrayList<GreenfootImage>();
+        for (GreenfootImage frame : frames)
+        {
+            flippedFrames.add(getMirroredImage(frame));
         }
+
+
+        currentFrames = frames;
+    }
+    
+    public Animation(String formattedPath, int maxNum, float scale)
+    {
+        this.numFrames = maxNum + 1;
+
+        frames = new ArrayList<GreenfootImage>();
+        for (int i = 0; i <= maxNum; i++)
+        {
+            String fileName = String.format(formattedPath, i);
+            frames.add(new GreenfootImage(fileName));
+        }
+        
+        scale(scale);
 
         flippedFrames = new ArrayList<GreenfootImage>();
         for (GreenfootImage frame : frames)
@@ -74,10 +87,30 @@ public class Animation
 
         return this;
     }
+    
+    public void scale(float s)
+    {
+        for(GreenfootImage frame : frames) {
+            int height = frame.getHeight();
+            
+            int width = frame.getWidth();
+            float ratio = (float)width / (float)height;
+             
+            int newHeight = (int)(height * s);
+             frame.scale((int)(ratio * newHeight), newHeight);
+   
+        }    
+    }
 
-    public void setDelay(int d)
+   public void setDelay(int d)
     {
         this.delay = d;
+    }
+    
+    public void reset()
+    {
+        currentFrame = 0;
+        counter = delay;
     }
 
     public void setAnimationCompleteListener(AnimationCompleteListener listener)

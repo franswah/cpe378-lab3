@@ -15,14 +15,16 @@ public class EvilWerewolf extends Enemy
     Animation attackAnimation;
     
     private static GreenfootSound[] damageSounds = new GreenfootSound[3];
+    
+    private float SCALE = .5f;
 
     private int knockedBack = 15;
     
     public EvilWerewolf() 
     {
-        walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
-        idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
-        attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4);
+        walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7, SCALE);
+        idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2, SCALE);
+        attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4, SCALE);
     
         attackAnimation.offsetX = 30;
     

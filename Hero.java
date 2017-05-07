@@ -19,6 +19,8 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
 
     public static final int scrollWidth = 250;
     
+    private float SCALE = .5f;
+    
     private DialogModal healthDialog;
     
     private GreenfootSound[] damageSounds = new GreenfootSound[2];
@@ -27,17 +29,15 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     {        
         super();
 
-        walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
-        idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
-        attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4);
+        walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7, SCALE);
+        idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2, SCALE);
+        attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4, SCALE);
 
         attackAnimation.offsetX = 25;
 
         setAnimation(Status.WALKING, walkingAnimation);
         setAnimation(Status.IDLE, idleAnimation);
         setAnimation(Status.ATTACKING, attackAnimation);
-
-        attackAnimation.setAnimationCompleteListener(this);
         
         strength = 15;
         defense = 6;
@@ -127,7 +127,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     }
     
     public void checkAttack() {
-        if (Greenfoot.isKeyDown("j") && currently != Status.ATTACKING) {
+        if (Greenfoot.isKeyDown("j")) {
             attack(Enemy.class);
         }
     }
@@ -137,6 +137,20 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         BlockingDialog killDialog = new BlockingDialog("You died\nR.I.P. Lukas\n\nPress ENTER to restart", getX(), wrld.getHeight()/2);
         killDialog.display(wrld);
         wrld.removeObject(this);
+    }
+    
+    @Override
+    public <T extends BattleActor> void executeAttack(Class<T> type)
+    {
+        int vX = 5;
+        int offsetX = 20;
+        int offsetY = 10;
+        if (faceLeft) 
+        {
+            vX = -vX;
+            offsetX = -offsetX;
+        }
+        getWorld().addObject(new Slash(vX, 0, this), getX() + offsetX, getY() + offsetY);
     }
     
     @Override
