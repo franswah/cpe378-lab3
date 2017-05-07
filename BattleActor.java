@@ -62,13 +62,19 @@ public abstract class BattleActor extends MovingActor implements Animation.Anima
         {
             currently = Status.ATTACKING;
             Animation anim = animations.get(Status.ATTACKING);
+            anim.reset();
             if (anim != null)
                 attackTimeout = anim.getLength();
             else
                 attackTimeout = DEFAULT_ATTACK_DELAY;
 
-
-            for (T enemy : getObjectsInRange(attackRange, type)) {
+            executeAttack(type);
+        }
+    }
+    
+    public <T extends BattleActor> void executeAttack(Class<T> type)
+    {
+        for (T enemy : getObjectsInRange(attackRange, type)) {
                 if (enemy.getX() > getX() && !faceLeft) {
                     enemy.beAttacked(this);
                 }
@@ -79,7 +85,6 @@ public abstract class BattleActor extends MovingActor implements Animation.Anima
                     enemy.beAttacked(this);
                 }
             }
-        }
     }
 
     public void beAttacked(BattleActor actor)

@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=ControlSequence
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ControlSequence\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=world\ steps
+comment1.target=ControlSequence(greenfoot.World,\ java.util.List)
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ Act\ -\ do\ whatever\ the\ ControlSequence\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment3.params=
+comment3.target=boolean\ isFinished()
+numComments=4

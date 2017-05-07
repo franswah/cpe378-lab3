@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import javafx.scene.shape.Ellipse;
+import java.util.*;
 
 
 /**
@@ -14,15 +15,19 @@ public class EvilWerewolf extends Enemy
     Animation idleAnimation;
     Animation attackAnimation;
     
+    public static boolean attackHero = false;
+    
     private static GreenfootSound[] damageSounds = new GreenfootSound[3];
+    
+    private float SCALE = .5f;
 
     private int knockedBack = 15;
     
     public EvilWerewolf() 
     {
-        walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7);
-        idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2);
-        attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4);
+        walkingAnimation = new Animation("WerewolfWalk/WerewolfWalking_%05d.png", 7, SCALE);
+        idleAnimation = new Animation("WerewolfIdle/WerewolfIdle_%05d.png", 2, SCALE);
+        attackAnimation = new Animation("WerewolfAttack/Werewolf_ClawLeft_%05d.png", 4, SCALE);
     
         attackAnimation.offsetX = 30;
     
@@ -56,11 +61,46 @@ public class EvilWerewolf extends Enemy
         
         super.act();
         
-        for (Hero hero : getObjectsInRange(500, Hero.class)) {
-            if (inRangeOf(hero, 60)) 
+        
+        if (attackHero)
+        {
+            for (Hero hero : getObjectsInRange(500, Hero.class)) {
+                if (inRangeOf(hero, 60)) 
+                {
+                    removeTarget();
+                    if (worldPos.x < hero.worldPos.x) 
+                    {
+                        faceLeft = false;
+                    }
+                    else
+                    {
+                        faceLeft = true;
+                    }
+                    attack(Hero.class);
+                }
+                else 
+                {
+                    setTarget(hero.worldPos.x, hero.getY(), 60);
+                }
+            }
+        }
+        else
+        {
+            chaseVillagers();
+        }
+        
+    }
+    
+    public void chaseVillagers()
+    {
+        List<Villager> villagers = getObjectsInRange(500, Villager.class);
+        Villager villager = (Villager)getNearest(villagers);
+        if (villager != null)
+        {
+            if (inRangeOf(villager, 60)) 
             {
                 removeTarget();
-                if (getX() < hero.getX()) 
+                if (worldPos.x < villager.worldPos.x) 
                 {
                     faceLeft = false;
                 }
@@ -68,14 +108,20 @@ public class EvilWerewolf extends Enemy
                 {
                     faceLeft = true;
                 }
-                attack(Hero.class);
+                attack(Villager.class);
             }
             else 
             {
-                setTarget(hero.getX(), hero.getY(), 60);
+                setTarget(villager.worldPos.x, 0, 60);
             }
         }
+        else
+        {
+            
+        }
     }
+    
+    
 
     @Override
     public void beAttacked(BattleActor actor)

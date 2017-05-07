@@ -45,7 +45,18 @@ public class BlockingDialog extends DialogModal
             close();
         }
         else if (key == "enter") {
-            Greenfoot.setWorld(new IntroScenario());
+            World world = getWorld();
+            
+            if (world instanceof TownScenario)
+            {
+                queue.clear();
+                Greenfoot.setWorld(new TownScenario());
+            }
+            else if (world instanceof IntroScenario)
+            {
+                queue.clear();
+                Greenfoot.setWorld(new IntroScenario());
+            }
         }
         super.act();
     }
