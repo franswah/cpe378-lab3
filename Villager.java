@@ -33,6 +33,10 @@ public class Villager extends BattleActor
      */
     public void act() 
     {
+         if (BlockingDialog.paused) {
+            return;
+        }
+        
         setAnimation(anim_running.setFlipped(faceLeft));
         
         if (left)

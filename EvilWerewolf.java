@@ -109,7 +109,7 @@ public class EvilWerewolf extends Enemy
         }
         else
         {
-            removeTarget();
+            
         }
     }
     
