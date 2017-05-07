@@ -126,7 +126,7 @@ public class IntroScenario extends CameraWorld
         GreenfootSound loop = new GreenfootSound("battle.wav");
         loop.playLoop();
         
-        BlockingDialog splash = new BlockingDialog("Wolfman\n(Beta)\n\nUse the W, A, S, D, keys to move\nUse SPACE to jump\nUse T to talk"
+        BlockingDialog splash = new BlockingDialog("Wolfman\n(Beta)\nby Jacob, Ryan, & Andy\n\nUse the W, A, S, D, keys to move\nUse SPACE to jump\nUse T to talk"
            + "\nUse J to attack\n\nClick, SPACE, J, and T will advance the dialogue\n\nUse ENTER to restart", 500,300);
         splash.display(this);
         
