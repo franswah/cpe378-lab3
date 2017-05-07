@@ -41,6 +41,8 @@ public abstract class MovingActor extends AnimatedActor
     public void act() 
     {
         super.act();
+        
+        CameraWorld world = (CameraWorld) getWorld();
 
         if (scrolls)
         {
@@ -79,7 +81,7 @@ public abstract class MovingActor extends AnimatedActor
             worldPos.add(v);
             
 
-            CameraWorld world = (CameraWorld) getWorld();
+            
            
             setLocation(worldPos.x - world.getCameraX(), worldPos.y - world.getCameraY());
             
@@ -92,6 +94,8 @@ public abstract class MovingActor extends AnimatedActor
             else {
                 setLocation(getX() + v.x, getY() + v.y);
             }
+            worldPos.x = getX() + world.getCameraX();
+            worldPos.y = getY() + world.getCameraY();
         }
         
         fall();

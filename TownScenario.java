@@ -34,11 +34,12 @@ public class TownScenario extends CameraWorld
         addObject(new Town(), 1400, 300);
 
         
-        insertGround(0, getWidth() + 100, 600);
+        insertGround(0, getWidth() + 500, 600);
         
         setBackground("images/sky.jpg");
         
-        addObject(new Hero(), 200, 500);
+        Hero hero = new Hero();
+        addObject(hero, 200, 500);
         
         List<ControlStep> steps = new ArrayList<ControlStep>();
         
@@ -48,6 +49,7 @@ public class TownScenario extends CameraWorld
 
         Villager firstVillager = new Villager(false);
         EvilWerewolf firstWolf = new EvilWerewolf();
+        hero.enabled = false;
         
         steps.add(new ControlStep() 
         {
@@ -91,6 +93,7 @@ public class TownScenario extends CameraWorld
                dialog.display(world);
                dialog.addNext("Oh, uh... just stretching..",300,350);
                dialog.addNext("Well hurry up,\nAnd I'll try to leave some left\nfor you to 'stretch' your claws into!",650,350);
+               
            }
         });
         
@@ -117,6 +120,7 @@ public class TownScenario extends CameraWorld
            + "\nUse J to attack\n\nClick, SPACE, J, and T will advance the dialogue\n\nUse ENTER to restart", 500,300);
            dialog.addNext("Lukas has decided that he cannot\ngive in to his werewolf bloodlust.\n"
            + "\nThese villagers are helpless and need his help.", 500,300);
+           hero.enabled = true;
            }
         });
         
@@ -139,10 +143,53 @@ public class TownScenario extends CameraWorld
                 townSequence.act();
             }
         }
+        else
+        {
+            List<Villager> villagers = getObjects(Villager.class);
+            List<EvilWerewolf> wolves = getObjects(EvilWerewolf.class);
+            
+            if (villagers.size() == 0)
+            {
+                BlockingDialog dialog = new BlockingDialog("All of the innocent villagers are dead. Maybe you should just stay a werewolf." +
+                "\n (Press Enter to Restart)", 500, 300);
+                dialog.display(this);
+            }
+            else if (wolves.size() == 0)
+            {
+                
+                
+                List<ControlStep> steps = new ArrayList<ControlStep>();
+                
+                steps.add(new ControlStep() 
+                {
+                   public int getDuration() { return 1; }
+                   
+                   public void act(World world) 
+                   {
+                       BlockingDialog dialog = new BlockingDialog("The villagers are safe for now.\n But Lukas is not.", 500, 300);
+                       dialog.display(world);
+                       dialog.addNext("It is time to find a way to reverse the curse.",300,350);
+                   }
+                });
+                
+                steps.add(new ControlStep() 
+                {
+                   public int getDuration() { return 1; }
+                   
+                   public void act(World world) 
+                   {
+                       Greenfoot.setWorld(new IntroScenario());
+                   }
+                });
+                townSequence = new ControlSequence(this, steps); 
+                started = false;
+            }
+        }
     }
     
     public void startAttack()
     {
+        
         addObject(new Villager(false), 1300, 500);
         addObject(new Villager(), 1600, 500);
         addObject(new Villager(false), 1900, 500);

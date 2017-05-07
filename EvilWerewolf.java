@@ -15,6 +15,8 @@ public class EvilWerewolf extends Enemy
     Animation idleAnimation;
     Animation attackAnimation;
     
+    public static boolean attackHero = false;
+    
     private static GreenfootSound[] damageSounds = new GreenfootSound[3];
     
     private float SCALE = .5f;
@@ -59,28 +61,34 @@ public class EvilWerewolf extends Enemy
         
         super.act();
         
-        chaseVillagers();
-        /*
-        for (Hero hero : getObjectsInRange(500, Hero.class)) {
-            if (inRangeOf(hero, 60)) 
-            {
-                removeTarget();
-                if (worldPos.x < hero.worldPos.x) 
+        
+        if (attackHero)
+        {
+            for (Hero hero : getObjectsInRange(500, Hero.class)) {
+                if (inRangeOf(hero, 60)) 
                 {
-                    faceLeft = false;
+                    removeTarget();
+                    if (worldPos.x < hero.worldPos.x) 
+                    {
+                        faceLeft = false;
+                    }
+                    else
+                    {
+                        faceLeft = true;
+                    }
+                    attack(Hero.class);
                 }
-                else
+                else 
                 {
-                    faceLeft = true;
+                    setTarget(hero.worldPos.x, hero.getY(), 60);
                 }
-                attack(Hero.class);
-            }
-            else 
-            {
-                setTarget(hero.worldPos.x, hero.getY(), 60);
             }
         }
-        */
+        else
+        {
+            chaseVillagers();
+        }
+        
     }
     
     public void chaseVillagers()

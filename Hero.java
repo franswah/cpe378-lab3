@@ -18,6 +18,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     private int knockedBack = 10;
 
     public static final int scrollWidth = 250;
+    public boolean enabled = true;
     
     private float SCALE = .5f;
     
@@ -67,11 +68,13 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         }
         
         super.act();
-      
-        move();
-        checkJump();
-        checkAttack();
-        scroll();
+       if (enabled)
+       {
+            move();
+            checkJump();
+            checkAttack();
+            scroll();
+        }
         
         if(isAtEdge()) {
             kill();

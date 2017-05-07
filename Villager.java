@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Villager extends BattleActor
+public class Villager extends Enemy
 {
     private int knockedBack = 10;
     Animation anim_running;
@@ -22,7 +22,7 @@ public class Villager extends BattleActor
     {
         super();
         anim_running = new Animation("VillagerRun/Villager_Running_%05d.png", 7, .4f);
-        maxSpeed = 7;
+        maxSpeed = 6;
         setImage(anim_running.getCurrentFrame());
         this.left = left;
     }
