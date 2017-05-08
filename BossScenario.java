@@ -10,6 +10,11 @@ import java.util.*;
 public class BossScenario extends CameraWorld
 {
 
+    ControlSequence endSequence;
+    private boolean secondPhase = false;
+    EvilWerewolf wolf1;
+    EvilWerewolf wolf2;
+    
     /**
      * Constructor for objects of class BossScenario.
      * 
@@ -25,11 +30,14 @@ public class BossScenario extends CameraWorld
         addObject(new DarkMountain(), 400,300);
         addObject(new DarkMountainFlipped(), 1400, 300);
 
-        
+        EvilWerewolf.attackHero = true;
         insertGround(-400, getWidth() + 500, 600);
         
         insertGround(-10, 300, 400);
         insertGround(850, 1100, 400);
+        
+        wolf1 = new EvilWerewolf();
+        wolf2 = new EvilWerewolf();
         
         setBackground("images/night.jpg");
         
@@ -40,9 +48,10 @@ public class BossScenario extends CameraWorld
         Witch witch = new Witch();
         addObject(witch, 500, 300); 
        
-        BlockingDialog splash = new BlockingDialog("Wha.. Who are you?",200,370);
+        BlockingDialog splash = new BlockingDialog("...",200,370);
         splash.display(this);
 
+        BlockingDialog.addNext("Wha.. Who are you?",200,370);
         BlockingDialog.addNext("Silly puppy, you don't remember me?",600,180);
         BlockingDialog.addNext("Wait.\nYou are the one who turned us\ninto these beasts?",200,370);
         BlockingDialog.addNext("Aw, I wouldn't call you a beast dearie.\nYou are all so fluffy and cute\nnow, unlike those disgusting humans.",600,180);
@@ -57,6 +66,75 @@ public class BossScenario extends CameraWorld
     {
         super.act();
         
-        
+        if (endSequence != null)
+        {
+            endSequence.act();
+        }
+        else
+        {
+            
+            List<Witch> witches = getObjects(Witch.class);
+            
+            if (witches.size() > 0)
+            {
+                if (witches.get(0).health < 100 && !secondPhase)
+                {
+                    secondPhase = true;
+                    addObject(wolf1, 100, 200);
+                    addObject(wolf2, 800, 200);
+                }
+            }
+            else
+            {
+                List<ControlStep> steps = new ArrayList<ControlStep>();
+                
+                steps.add(new ControlStep() 
+                {
+                   public int getDuration() { return 50; }
+                   
+                   public void act(World world) 
+                   {
+                       for (EvilWerewolf wolf : getObjects(EvilWerewolf.class))
+                       {
+                           removeObject(wolf);
+                       }
+                   }
+                });
+                    
+                steps.add(new ControlStep() 
+                {
+                   public int getDuration() { return 1; }
+                   
+                   public void act(World world) 
+                   {
+                       BlockingDialog dialog = new BlockingDialog("It is done.", 500, 300);
+                       dialog.display(world);
+                       dialog.addNext("Here we go.",500,300);
+                       dialog.addNext("Time to change back.",500,300);
+                       dialog.addNext("Any second now.",500,300);
+                       dialog.addNext("Or not...",500,300);
+                       dialog.addNext("Hmm... \nI guess violence doesn't solve everything.",500,300);
+                       dialog.addNext("This beast form must be getting to me.",500,300);
+                       dialog.addNext("Or...",500,300);
+                       dialog.addNext("Perhaps an artist out there\ndidn't have time to draw\nmy transformation..",500,300);
+                       dialog.addNext("One can only hope.",500,300);
+                       dialog.addNext("THE END",500,300);
+                   }
+                });
+                
+                steps.add(new ControlStep() 
+                {
+                   public int getDuration() { return 1; }
+                   
+                   public void act(World world) 
+                   {
+                       Greenfoot.stop();
+                   }
+                });
+                
+                endSequence = new ControlSequence(this, steps);
+                    
+            }
+        }
     }
 }

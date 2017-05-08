@@ -77,7 +77,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
             scroll();
         }
         
-        if(isAtEdge()) {
+        if(getY() > getWorld().getHeight()) {
             kill();
         }
     }    

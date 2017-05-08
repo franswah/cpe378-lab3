@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class IntroScenario extends CameraWorld
 {
+    Hero hero;
 
     /**
      * Constructor for objects of class IntroScenario.
@@ -16,7 +17,7 @@ public class IntroScenario extends CameraWorld
     public IntroScenario()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(25000, 600);
+        super(12000, 600);
     }
     
     protected void prepare() {
@@ -31,9 +32,8 @@ public class IntroScenario extends CameraWorld
         
         EvilWerewolf.attackHero = true;
         
-        setBackground("images/sky-dark.png");
+        setBackground("images/night.png");
         
-        addObject(new Witch(), 11500 ,495);
 
         // Hill 1
         insertGround(0, 2000, 600);
@@ -111,14 +111,16 @@ public class IntroScenario extends CameraWorld
        
         insertGround(9000, 10000, 600);
         insertGround(10000, 11000, 500);
+        insertGround(10000, 11000, 550);
         insertGrass(10500, 11000, 450);
         
-        insertGround(10750, 12000, 600);
+        insertGround(10750, 12500, 600);
         
         EvilWerewolf evilWolf = new EvilWerewolf();
         evilWolf.setImage(Animation.getMirroredImage(evilWolf.idleAnimation.getCurrentFrame()));
         addObject(evilWolf, 600, 500);
-        addObject(new Hero(), 300, 500);
+        hero = new Hero();
+        addObject(hero, 300, 500);
         //super.setCameraX(9000);
         
         
@@ -135,5 +137,15 @@ public class IntroScenario extends CameraWorld
         BlockingDialog.addNext("Why would you want to? You're much stronger now.\nPlus, when we take over the kingdom you'll\nprobably want to be on the winning side.",600,350);
         BlockingDialog.addNext("I don't have time for this!\nI need to find a way to change back!",300,350);
         BlockingDialog.addNext("Fine, have it your way, but there's\nno way I can let you escape.",600,350);
+    }
+    
+    public void act()
+    {
+        super.act();
+        
+        if (hero.worldPos.x > 11700)
+        {
+            Greenfoot.setWorld(new BossScenario());
+        }
     }
 }

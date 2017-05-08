@@ -23,6 +23,7 @@ public abstract class MovingActor extends AnimatedActor
     protected int jumpV = 25;
     
     protected boolean scrolls = true;
+    protected boolean canFly = false;
     
 
     protected Vector target = null;
@@ -69,9 +70,14 @@ public abstract class MovingActor extends AnimatedActor
                 else 
                 {
                     v.x = 0;
+                    if (target.y != 0 && worldPos.y > target.y - 10 && isGrounded())
+                    {
+                        jump();
+                    }
                 }
-                if (target.y > 0)
+                if (canFly)
                 {
+                    
                     if (target.y - targetR > worldPos.y)
                     {
    
@@ -79,7 +85,7 @@ public abstract class MovingActor extends AnimatedActor
                         if (v.y > maxSpeed) v.y = maxSpeed;
     
                         if (target.y < worldPos.y + v.y)
-                            v.x = target.y - worldPos.y;
+                            v.y = target.y - worldPos.y;
                     }
                     else if (target.y + targetR < worldPos.y)
                     {
@@ -94,6 +100,7 @@ public abstract class MovingActor extends AnimatedActor
                     {
                         v.y = 0;
                     }
+
                 }
             }
 
@@ -117,6 +124,7 @@ public abstract class MovingActor extends AnimatedActor
         
         fall();
     }
+    
     
     protected void checkBlocked()
     {

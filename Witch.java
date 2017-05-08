@@ -32,9 +32,10 @@ public class Witch extends Enemy
         targets.add(new Vector(100, 300));
         targets.add(new Vector(800, 450));
         
+        canFly = true;
         maxSpeed = 3;
         strength = 15;
-        health = 350;
+        health = 200;
         rand = new Random(454857);
     }
     
@@ -91,6 +92,12 @@ public class Witch extends Enemy
     
     @Override
     protected void fall()
+    {
+        
+    }
+    
+    @Override
+    public void jump()
     {
         
     }

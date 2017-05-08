@@ -36,7 +36,7 @@ public class TownScenario extends CameraWorld
         
         insertDirt(-400, getWidth() + 500, 600);
         
-        setBackground("images/sky.jpg");
+        setBackground("images/night.jpg");
         
         Hero hero = new Hero();
         addObject(hero, 200, 500);
@@ -53,7 +53,7 @@ public class TownScenario extends CameraWorld
         
         steps.add(new ControlStep() 
         {
-           public int getDuration() { return 100; }
+           public int getDuration() { return 160; }
            
            public void act(World world) 
            {
@@ -89,8 +89,9 @@ public class TownScenario extends CameraWorld
            
            public void act(World world) 
            {
-               BlockingDialog dialog = new BlockingDialog("Hey Lukas!\n What's the hold up?",650,350);
+               BlockingDialog dialog = new BlockingDialog("...",650,350);
                dialog.display(world);
+               dialog.addNext("Hey Lukas!\n What's the hold up?",650,350);
                dialog.addNext("Oh, uh... just stretching..",300,350);
                dialog.addNext("Well hurry up,\nAnd I'll try to leave some left\nfor you to 'stretch' your claws into!",650,350);
                
@@ -116,8 +117,8 @@ public class TownScenario extends CameraWorld
                BlockingDialog dialog = new BlockingDialog("Sigh. This is not right.",300,350);
                dialog.display(world);
                dialog.addNext("But there are so many in the pack.\nI'm not sure I have any other choice.",300,350);
-               dialog.addNext("Wolf Blood\n\nUse the W, A, S, D, keys to move\nUse SPACE to jump\nUse T to talk"
-           + "\nUse J to attack\n\nClick, SPACE, J, and T will advance the dialogue\n\nUse ENTER to restart", 500,300);
+               dialog.addNext("Wolf Blood\n\nUse the A and D, keys to move\nUse SPACE to jump"
+           + "\nUse J to attack\n\nClick, SPACE, and J will advance the dialogue\n", 500,300);
            dialog.addNext("Lukas has decided that he cannot\ngive in to his werewolf bloodlust.\n"
            + "\nThese villagers are helpless and need his help.", 500,300);
            hero.enabled = true;

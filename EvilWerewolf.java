@@ -67,6 +67,10 @@ public class EvilWerewolf extends Enemy
         if (attackHero)
         {
             for (Hero hero : getObjectsInRange(800, Hero.class)) {
+                //if (hero.worldPos.y < worldPos.y -20 && isGrounded())
+                //{
+                    //jump();
+                //}
                 if (inRangeOf(hero, 60)) 
                 {
                     removeTarget();
