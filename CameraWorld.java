@@ -21,6 +21,8 @@ public abstract class CameraWorld extends World
     private int worldX;
     private int worldY;
     
+    public static GreenfootSound backgroundMusic;
+    
     /**
      * Constructor for objects of class CameraWorld.
      * 
@@ -119,5 +121,33 @@ public abstract class CameraWorld extends World
     public int getHeight()
     {
         return worldHeight;
+    }
+    
+    protected void insertGround(int start, int end, int height)
+    {
+        GreenfootImage block = new Ground().getImage();
+
+        for (int i = start; i < end; i+= block.getWidth())
+        {
+            addObject(new Ground(), i, height);
+        }
+    }
+    
+    protected void insertGrass(int start, int end, int height) {
+    GreenfootImage block = new Grass().getImage();
+
+        for (int i = start; i < end; i+= block.getWidth())
+        {
+            addObject(new Grass(), i, height);
+        }
+    }
+    
+    protected void insertDirt(int start, int end, int height) {
+    GreenfootImage block = new Dirt().getImage();
+
+        for (int i = start; i < end; i+= block.getWidth())
+        {
+            addObject(new Dirt(), i, height);
+        }
     }
 }

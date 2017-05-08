@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=BossScenario
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ BossScenario\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=BossScenario()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ BossScenario.\r\n\ \r\n
+comment2.params=
+comment2.target=void\ prepare()
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=int\ getDuration()
+comment5.params=world
+comment5.target=void\ act(greenfoot.World)
+comment6.params=
+comment6.target=int\ getDuration()
+comment7.params=world
+comment7.target=void\ act(greenfoot.World)
+comment8.params=
+comment8.target=int\ getDuration()
+comment9.params=world
+comment9.target=void\ act(greenfoot.World)
+numComments=10

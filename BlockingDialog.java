@@ -10,14 +10,22 @@ import java.lang.String;
  */
 public class BlockingDialog extends DialogModal
 {
-    protected static ArrayList<BlockingDialog> queue = new ArrayList<BlockingDialog>();
+    public static ArrayList<BlockingDialog> queue = new ArrayList<BlockingDialog>();
     public static boolean paused = false;
     protected int xPosition, yPosition;
+    protected boolean closable = true;
     
     public BlockingDialog(String text, int x, int y) {
        super(text);
        xPosition = x;
        yPosition = y;
+    }
+    
+    public BlockingDialog(String text, int x, int y, boolean closable) {
+       super(text);
+       xPosition = x;
+       yPosition = y;
+       this.closable = closable;
     }
     
     public void display(World world) {
@@ -41,7 +49,7 @@ public class BlockingDialog extends DialogModal
     public void act() 
     {
         String key = Greenfoot.getKey();
-        if (Greenfoot.mouseClicked(null) || key == "j" || key == "space" || key == "t") {
+        if (closable && (Greenfoot.mouseClicked(null) || key == "j" || key == "space" || key == "t")) {
             close();
         }
         else if (key == "enter") {
@@ -56,6 +64,11 @@ public class BlockingDialog extends DialogModal
             {
                 queue.clear();
                 Greenfoot.setWorld(new IntroScenario());
+            }
+            else
+            {
+                queue.clear();
+                Greenfoot.setWorld(new BossScenario());
             }
         }
         super.act();

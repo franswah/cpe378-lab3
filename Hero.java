@@ -17,7 +17,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     
     private int knockedBack = 10;
 
-    public static final int scrollWidth = 250;
+    public int scrollWidth = 250;
     public boolean enabled = true;
     
     private float SCALE = .5f;
@@ -42,6 +42,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         
         strength = 15;
         defense = 6;
+        jumpV = 29;
         
         damageSounds[0] = new GreenfootSound("growl3.wav");
         damageSounds[1] = new GreenfootSound("growl5.wav");
@@ -76,7 +77,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
             scroll();
         }
         
-        if(isAtEdge()) {
+        if(getY() > getWorld().getHeight()) {
             kill();
         }
     }    
@@ -137,7 +138,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     
     public void kill() {
         World wrld = getWorld();
-        BlockingDialog killDialog = new BlockingDialog("You died\nR.I.P. Lukas\n\nPress ENTER to restart", getX(), wrld.getHeight()/2);
+        BlockingDialog killDialog = new BlockingDialog("You died\nR.I.P. Lukas\n\nPress ENTER to restart", getX(), wrld.getHeight()/2, false);
         killDialog.display(wrld);
         wrld.removeObject(this);
     }

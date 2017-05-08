@@ -8,6 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class IntroScenario extends CameraWorld
 {
+    Hero hero;
+    Transition opening;
 
     /**
      * Constructor for objects of class IntroScenario.
@@ -16,7 +18,7 @@ public class IntroScenario extends CameraWorld
     public IntroScenario()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(25000, 600);
+        super(12000, 600);
     }
     
     protected void prepare() {
@@ -31,9 +33,8 @@ public class IntroScenario extends CameraWorld
         
         EvilWerewolf.attackHero = true;
         
-        setBackground("images/sky-dark.png");
+        setBackground("images/night.png");
         
-        addObject(new Witch(), 11500 ,495);
 
         // Hill 1
         insertGround(0, 2000, 600);
@@ -111,57 +112,49 @@ public class IntroScenario extends CameraWorld
        
         insertGround(9000, 10000, 600);
         insertGround(10000, 11000, 500);
+        insertGround(10000, 11000, 550);
         insertGrass(10500, 11000, 450);
         
-        insertGround(10750, 12000, 600);
+        insertGround(10750, 12500, 600);
         
         EvilWerewolf evilWolf = new EvilWerewolf();
         evilWolf.setImage(Animation.getMirroredImage(evilWolf.idleAnimation.getCurrentFrame()));
         addObject(evilWolf, 600, 500);
-        addObject(new Hero(), 300, 500);
+        hero = new Hero();
+        addObject(hero, 300, 500);
         //super.setCameraX(9000);
         
         
         // Plays music the entire time this scene is running. Uncomment if you want to hear the same minute looped over and over.
-        GreenfootSound loop = new GreenfootSound("battle.wav");
-        loop.setVolume(5);
-        loop.playLoop();
-        
-        BlockingDialog splash = new BlockingDialog("How could you turn on us?\nWe are family!",600,350);
-        splash.display(this);
-
-        BlockingDialog.addNext("I never wanted this life.",300,350);
-        BlockingDialog.addNext("You need to tell me how\nI can change back!",300,350);
-        BlockingDialog.addNext("Why would you want to? You're much stronger now.\nPlus, when we take over the kingdom you'll\nprobably want to be on the winning side.",600,350);
-        BlockingDialog.addNext("I don't have time for this!\nI need to find a way to change back!",300,350);
-        BlockingDialog.addNext("Fine, have it your way, but there's\nno way I can let you escape.",600,350);
+        if (backgroundMusic != null) {
+            backgroundMusic.stop();
+        }
+        backgroundMusic = new GreenfootSound("battle.wav");
+        backgroundMusic.setVolume(95);
+        backgroundMusic.playLoop();
+        BlockingDialog.paused = false;
+        BlockingDialog.queue.clear();
+       opening = new Transition(100,true);
+       addObject(opening,500,300);
     }
-
-    private void insertGround(int start, int end, int height)
+    
+    public void act()
     {
-        GreenfootImage block = new Ground().getImage();
-
-        for (int i = start; i < end; i+= block.getWidth())
-        {
-            addObject(new Ground(), i, height);
+        super.act();
+        if (opening != null && opening.isFinished()) {
+            
+            BlockingDialog splash = new BlockingDialog("How could you turn on us?\nWe are family!",600,350);
+            splash.display(this);
+            BlockingDialog.addNext("I never wanted this life.",300,350);
+            BlockingDialog.addNext("You need to tell me how\nI can change back!",300,350);
+            BlockingDialog.addNext("Why would you want to? You're much stronger now.\nPlus, when we take over the kingdom you'll\nprobably want to be on the winning side.",600,350);
+            BlockingDialog.addNext("I don't have time for this!\nI need to find a way to change back!",300,350);
+            BlockingDialog.addNext("Fine, have it your way, but there's\nno way I can let you escape.",600,350);
+            opening = null;
         }
-    }
-    
-    private void insertGrass(int start, int end, int height) {
-    GreenfootImage block = new Grass().getImage();
-
-        for (int i = start; i < end; i+= block.getWidth())
+        if (hero.worldPos.x > 11700)
         {
-            addObject(new Grass(), i, height);
-        }
-    }
-    
-    private void insertDirt(int start, int end, int height) {
-    GreenfootImage block = new Dirt().getImage();
-
-        for (int i = start; i < end; i+= block.getWidth())
-        {
-            addObject(new Dirt(), i, height);
+            Greenfoot.setWorld(new BossScenario());
         }
     }
 }
