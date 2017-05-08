@@ -36,7 +36,7 @@ public class Witch extends Enemy
         canFly = true;
         maxSpeed = 3;
         strength = 15;
-        health = 200;
+        health = 180;
         rand = new Random(454857);
         
         if (damaged[0] == null) {
