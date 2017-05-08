@@ -25,8 +25,8 @@ public abstract class MovingActor extends AnimatedActor
     protected boolean scrolls = true;
     
 
-    private Vector target = null;
-    private int targetR;
+    protected Vector target = null;
+    protected int targetR;
     
     public MovingActor() {
         super();
@@ -70,18 +70,35 @@ public abstract class MovingActor extends AnimatedActor
                 {
                     v.x = 0;
                 }
-            }
-
-            if((rightIsBlocked() && !faceLeft) || (leftIsBlocked() && faceLeft)) {
-                if (target != null) {
-                    jump();
+                if (target.y > 0)
+                {
+                    if (target.y - targetR > worldPos.y)
+                    {
+   
+                        v.y += accel;
+                        if (v.y > maxSpeed) v.y = maxSpeed;
+    
+                        if (target.y < worldPos.y + v.y)
+                            v.x = target.y - worldPos.y;
+                    }
+                    else if (target.y + targetR < worldPos.y)
+                    {
+                        faceLeft = true;
+                        v.y -= accel;
+                        if (v.y < -maxSpeed) v.y = -maxSpeed;
+    
+                        if (target.y > worldPos.y - v.y)
+                            v.y = target.y - worldPos.y;
+                    }
+                    else 
+                    {
+                        v.y = 0;
+                    }
                 }
-                v.x = 0;
             }
-            worldPos.add(v);
-            
 
-            
+            checkBlocked();
+            worldPos.add(v);
            
             setLocation(worldPos.x - world.getCameraX(), worldPos.y - world.getCameraY());
             
@@ -99,6 +116,16 @@ public abstract class MovingActor extends AnimatedActor
         }
         
         fall();
+    }
+    
+    protected void checkBlocked()
+    {
+        if((rightIsBlocked() && !faceLeft) || (leftIsBlocked() && faceLeft)) {
+            if (target != null) {
+                jump();
+            }
+            v.x = 0;
+        }
     }
     
     
@@ -145,7 +172,7 @@ public abstract class MovingActor extends AnimatedActor
         v.y = -jumpV;
     }
     
-    private void fall() {
+    protected void fall() {
         
         if (!isGrounded())
         {   

@@ -22,7 +22,7 @@ public class Villager extends Enemy
     {
         super();
         anim_running = new Animation("VillagerRun/Villager_Running_%05d.png", 7, .4f);
-        maxSpeed = 6;
+        maxSpeed = 7;
         setImage(anim_running.getCurrentFrame());
         this.left = left;
     }
@@ -62,6 +62,7 @@ public class Villager extends Enemy
     @Override
     public void beAttacked(BattleActor actor)
     {
+       
         setVY(-knockedBack);
 
         super.beAttacked(actor);

@@ -34,7 +34,7 @@ public class TownScenario extends CameraWorld
         addObject(new Town(), 1400, 300);
 
         
-        insertGround(0, getWidth() + 500, 600);
+        insertDirt(-400, getWidth() + 500, 600);
         
         setBackground("images/sky.jpg");
         
@@ -53,12 +53,12 @@ public class TownScenario extends CameraWorld
         
         steps.add(new ControlStep() 
         {
-           public int getDuration() { return 90; }
+           public int getDuration() { return 100; }
            
            public void act(World world) 
            {
-               addObject(firstWolf, 350, 500);
-               addObject(firstVillager, 400, 500);
+               addObject(firstWolf, -100, 500);
+               addObject(firstVillager, -70, 500);
            }
         });
         
@@ -124,7 +124,8 @@ public class TownScenario extends CameraWorld
            }
         });
         
-        townSequence = new ControlSequence(this, steps);  
+        townSequence = new ControlSequence(this, steps); 
+        
     }
     
     @Override
@@ -168,7 +169,7 @@ public class TownScenario extends CameraWorld
                    {
                        BlockingDialog dialog = new BlockingDialog("The villagers are safe for now.\n But Lukas is not.", 500, 300);
                        dialog.display(world);
-                       dialog.addNext("It is time to find a way to reverse the curse.",300,350);
+                       dialog.addNext("It is time to find a way to reverse the curse.",500,300);
                    }
                 });
                 
@@ -195,19 +196,16 @@ public class TownScenario extends CameraWorld
         addObject(new Villager(false), 1900, 500);
         addObject(new Villager(), 1700, 500);
         addObject(new Villager(), 1100, 500);
+        addObject(new Villager(false), -150, 500);
+        addObject(new Villager(false), -100, 500);
         
         addObject(new EvilWerewolf(), 1100, 500);
         addObject(new EvilWerewolf(), 1200, 500);
         addObject(new EvilWerewolf(), 1800, 500);
+        addObject(new EvilWerewolf(), -300, 500);
+        addObject(new EvilWerewolf(), -200, 500);
+        addObject(new EvilWerewolf(), 1500, 500);
     }
     
-    private void insertGround(int start, int end, int height)
-    {
-        GreenfootImage block = new Ground().getImage();
-
-        for (int i = start; i < end; i+= block.getWidth())
-        {
-            addObject(new Dirt(), i, height);
-        }
-    }
+    
 }

@@ -39,6 +39,8 @@ public class EvilWerewolf extends Enemy
         setAnimation(Status.IDLE, idleAnimation);
         setAnimation(Status.ATTACKING, attackAnimation);
         
+        maxSpeed = 6;
+        
         if (damageSounds[0] == null) {
            damageSounds[0] = new GreenfootSound("growl1.wav");
            damageSounds[1] = new GreenfootSound("growl2.wav");
@@ -64,7 +66,7 @@ public class EvilWerewolf extends Enemy
         
         if (attackHero)
         {
-            for (Hero hero : getObjectsInRange(500, Hero.class)) {
+            for (Hero hero : getObjectsInRange(800, Hero.class)) {
                 if (inRangeOf(hero, 60)) 
                 {
                     removeTarget();
@@ -93,7 +95,7 @@ public class EvilWerewolf extends Enemy
     
     public void chaseVillagers()
     {
-        List<Villager> villagers = getObjectsInRange(500, Villager.class);
+        List<Villager> villagers = getObjectsInRange(1500, Villager.class);
         Villager villager = (Villager)getNearest(villagers);
         if (villager != null)
         {

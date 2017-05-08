@@ -136,32 +136,4 @@ public class IntroScenario extends CameraWorld
         BlockingDialog.addNext("I don't have time for this!\nI need to find a way to change back!",300,350);
         BlockingDialog.addNext("Fine, have it your way, but there's\nno way I can let you escape.",600,350);
     }
-
-    private void insertGround(int start, int end, int height)
-    {
-        GreenfootImage block = new Ground().getImage();
-
-        for (int i = start; i < end; i+= block.getWidth())
-        {
-            addObject(new Ground(), i, height);
-        }
-    }
-    
-    private void insertGrass(int start, int end, int height) {
-    GreenfootImage block = new Grass().getImage();
-
-        for (int i = start; i < end; i+= block.getWidth())
-        {
-            addObject(new Grass(), i, height);
-        }
-    }
-    
-    private void insertDirt(int start, int end, int height) {
-    GreenfootImage block = new Dirt().getImage();
-
-        for (int i = start; i < end; i+= block.getWidth())
-        {
-            addObject(new Dirt(), i, height);
-        }
-    }
 }

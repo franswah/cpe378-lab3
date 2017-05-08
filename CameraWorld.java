@@ -120,4 +120,32 @@ public abstract class CameraWorld extends World
     {
         return worldHeight;
     }
+    
+    protected void insertGround(int start, int end, int height)
+    {
+        GreenfootImage block = new Ground().getImage();
+
+        for (int i = start; i < end; i+= block.getWidth())
+        {
+            addObject(new Ground(), i, height);
+        }
+    }
+    
+    protected void insertGrass(int start, int end, int height) {
+    GreenfootImage block = new Grass().getImage();
+
+        for (int i = start; i < end; i+= block.getWidth())
+        {
+            addObject(new Grass(), i, height);
+        }
+    }
+    
+    protected void insertDirt(int start, int end, int height) {
+    GreenfootImage block = new Dirt().getImage();
+
+        for (int i = start; i < end; i+= block.getWidth())
+        {
+            addObject(new Dirt(), i, height);
+        }
+    }
 }
