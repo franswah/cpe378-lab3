@@ -25,7 +25,8 @@ public class Orb extends Projectile
        boolean attacked = false;
        for (Hero hero : getIntersectingObjects(Hero.class))
        {
-           hero.beAttacked(attacker);
+           if (attacker != null)
+            hero.beAttacked(attacker);
            attacked = true;
        }
        

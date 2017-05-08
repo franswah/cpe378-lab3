@@ -32,7 +32,8 @@ public class Slash extends Projectile
        
        for (Enemy enemy : enemies)
        {
-           enemy.beAttacked(attacker);
+           if (attacker != null)
+            enemy.beAttacked(attacker);
        }
        
        if (enemies.size() > 0)

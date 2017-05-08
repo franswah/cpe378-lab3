@@ -132,7 +132,7 @@ public class EvilWerewolf extends Enemy
     @Override
     public void beAttacked(BattleActor actor)
     {
-        if (actor.getX() > getX())
+       if (actor.getX() > getX())
             setVX(-knockedBack);
         else
             setVX(knockedBack);

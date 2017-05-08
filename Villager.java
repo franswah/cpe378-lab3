@@ -26,6 +26,7 @@ public class Villager extends Enemy
         maxSpeed = 7;
         setImage(anim_running.getCurrentFrame());
         this.left = left;
+        health = 150;
         
         if (damaged[0] == null) {
             damaged[0] = new GreenfootSound("scream1.mp3");
