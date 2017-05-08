@@ -61,7 +61,7 @@ public class TownScenario extends CameraWorld
                     backgroundMusic.stop();
                }
                else {
-                   backgroundMusic = new GreenfootSound("towndark.wav");
+                   backgroundMusic = new GreenfootSound("towndark.mp3");
                }
                backgroundMusic.setVolume(95);
                backgroundMusic.playLoop();

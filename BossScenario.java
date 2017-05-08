@@ -63,7 +63,7 @@ public class BossScenario extends CameraWorld
         if (backgroundMusic != null) {
             backgroundMusic.stop();
         }
-        backgroundMusic = new GreenfootSound("boss.wav");
+        backgroundMusic = new GreenfootSound("boss.mp3");
         backgroundMusic.setVolume(95);
         backgroundMusic.playLoop();
     }

@@ -129,7 +129,7 @@ public class IntroScenario extends CameraWorld
         if (backgroundMusic != null) {
             backgroundMusic.stop();
         }
-        backgroundMusic = new GreenfootSound("battle.wav");
+        backgroundMusic = new GreenfootSound("battle.mp3");
         backgroundMusic.setVolume(95);
         backgroundMusic.playLoop();
         BlockingDialog.paused = false;

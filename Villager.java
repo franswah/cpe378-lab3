@@ -11,6 +11,7 @@ public class Villager extends Enemy
     private int knockedBack = 10;
     Animation anim_running;
     private boolean left = true;
+    private static GreenfootSound[] damaged = new GreenfootSound[2];
     
     
     public Villager()
@@ -25,6 +26,13 @@ public class Villager extends Enemy
         maxSpeed = 7;
         setImage(anim_running.getCurrentFrame());
         this.left = left;
+        
+        if (damaged[0] == null) {
+            damaged[0] = new GreenfootSound("scream1.mp3");
+            damaged[1] = new GreenfootSound("scream2.mp3");
+            damaged[0].setVolume(90);
+            damaged[1].setVolume(90);
+        }
     }
     
     /**
@@ -64,6 +72,8 @@ public class Villager extends Enemy
     {
        
         setVY(-knockedBack);
+        
+        damaged[Greenfoot.getRandomNumber(2)].play();
 
         super.beAttacked(actor);
     } 

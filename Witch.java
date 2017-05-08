@@ -15,6 +15,7 @@ public class Witch extends Enemy
     Random rand;
     int attackInterval = 0;
 
+    private static GreenfootSound[] damaged = new GreenfootSound[2];
     
     public Witch() {
         image = new GreenfootImage("witch.png");
@@ -37,6 +38,13 @@ public class Witch extends Enemy
         strength = 15;
         health = 200;
         rand = new Random(454857);
+        
+        if (damaged[0] == null) {
+            damaged[0] = new GreenfootSound("witch1.mp3");
+            damaged[1] = new GreenfootSound("witch2.mp3");
+            damaged[0].setVolume(90);
+            damaged[1].setVolume(90);
+        }
     }
     
     /**
@@ -86,6 +94,9 @@ public class Witch extends Enemy
         worldPos.x = t.x;
         worldPos.y = t.y;
         setTarget(t.x, t.y);
+        
+        damaged[Greenfoot.getRandomNumber(2)].play();
+        
         super.beAttacked(actor);
        
     }

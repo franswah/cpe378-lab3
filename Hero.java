@@ -24,7 +24,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     
     private DialogModal healthDialog;
     
-    private GreenfootSound[] damageSounds = new GreenfootSound[2];
+    private static GreenfootSound[] sounds = new GreenfootSound[3];
 
     public Hero()
     {        
@@ -44,10 +44,12 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         defense = 6;
         jumpV = 29;
         
-        damageSounds[0] = new GreenfootSound("growl3.wav");
-        damageSounds[1] = new GreenfootSound("growl5.wav");
-        damageSounds[0].setVolume(80);
-        damageSounds[1].setVolume(80);
+        sounds[0] = new GreenfootSound("growl3.mp3");
+        sounds[1] = new GreenfootSound("growl5.mp3");
+        sounds[2] = new GreenfootSound("death.mp3");
+        sounds[0].setVolume(90);
+        sounds[1].setVolume(90);
+        sounds[2].setVolume(100);
         scrolls = false;
         setImage(idleAnimation.getCurrentFrame());
     }
@@ -138,6 +140,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
     
     public void kill() {
         World wrld = getWorld();
+        sounds[2].play();
         BlockingDialog killDialog = new BlockingDialog("You died\nR.I.P. Lukas\n\nPress ENTER to restart", getX(), wrld.getHeight()/2, false);
         killDialog.display(wrld);
         wrld.removeObject(this);
@@ -163,7 +166,7 @@ public class Hero extends BattleActor implements Animation.AnimationCompleteList
         healthDialog.setText("Health: " + Math.max(health, 0));
         
         // Play damage animation?
-        damageSounds[Greenfoot.getRandomNumber(2)].play();
+        sounds[Greenfoot.getRandomNumber(2)].play();
       
         if (health <= 0) {
            kill();

@@ -42,9 +42,9 @@ public class EvilWerewolf extends Enemy
         maxSpeed = 6;
         
         if (damageSounds[0] == null) {
-           damageSounds[0] = new GreenfootSound("growl1.wav");
-           damageSounds[1] = new GreenfootSound("growl2.wav");
-           damageSounds[2] = new GreenfootSound("growl4.wav");
+           damageSounds[0] = new GreenfootSound("growl1.mp3");
+           damageSounds[1] = new GreenfootSound("growl2.mp3");
+           damageSounds[2] = new GreenfootSound("growl4.mp3");
            damageSounds[0].setVolume(80);
            damageSounds[1].setVolume(80);
            damageSounds[2].setVolume(80);
