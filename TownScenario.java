@@ -146,7 +146,7 @@ public class TownScenario extends CameraWorld
                BlockingDialog dialog = new BlockingDialog("Sigh. This is not right.",300,350);
                dialog.display(world);
                dialog.addNext("But there are so many in the pack.\nI'm not sure I have any other choice.",300,350);
-               dialog.addNext("Wolf Blood\n\nUse the A and D, keys to move\nUse SPACE to jump"
+               dialog.addNext("Wolf Blood\n\nBy Jacob Francis,\nRyan Kehlenbeck, and Andrew Peterson\n\nUse the A and D, keys to move\nUse SPACE to jump"
            + "\nUse J to attack\n\nClick, SPACE, and J will advance the dialogue\n", 500,300);
            dialog.addNext("Lukas has decided that he cannot\ngive in to his werewolf bloodlust.\n"
            + "\nThese villagers are helpless and need his help.", 500,300);
